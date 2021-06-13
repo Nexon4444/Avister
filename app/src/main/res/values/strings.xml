@@ -49,5 +49,10 @@
     <string name="settings">Settings</string>
     <string name="use_note_colors">Use Note Colors</string>
     <string name="home">Home</string>
+    <!--main menu buttons-->
+    <string name="play_available_midi_files">Play available midi_files</string>
+    <string name="generate_midi_files">Generate midi files</string>
+    <string name="test_sight_reading_skill">Test sight reading skill</string>
+
 
 </resources>
