@@ -8,8 +8,9 @@ import java.io.InputStream
 import java.util.*
 
 
-class ConfigurationManager(context: Context){
+class ConfigurationManager(context: Context) {
     private val properties = Properties()
+
     init {
         val resources: Resources = context.resources
         val rawResource: InputStream = resources.openRawResource(R.raw.config)
@@ -17,10 +18,11 @@ class ConfigurationManager(context: Context){
 
         properties.load(rawResource)
     }
+
     operator fun get(configElement: String): String {
-         when (val prop = properties[configElement]){
-            is String ->return prop
-            else -> throw IllegalArgumentException("Config Element parsed as null")
+        when (val prop = properties[configElement]) {
+            is String -> return prop
+            else -> throw IllegalArgumentException("Config Element " + configElement + " is not reachable")
         }
     }
 //    fun loadConfiguration() {
