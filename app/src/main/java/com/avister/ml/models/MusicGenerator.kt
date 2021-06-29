@@ -1,8 +1,10 @@
 package com.avister.ml.models
 
 import androidx.core.text.isDigitsOnly
-import org.jfugue.pattern.Pattern
-import org.jfugue.theory.Note
+import org.jfugue.Note
+import org.jfugue.Pattern
+//import org.jfugue.pattern.Pattern
+//import org.jfugue.theory.Note
 import java.nio.MappedByteBuffer
 
 //import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -51,10 +53,10 @@ open class MusicGenerator(
 
     fun createNote(noteToConvert: String): Note {
 //        if ()
-        val note = Note(noteToConvert)
+        val note = Note(noteToConvert.toByte())
 //        val note = Note(noteToConvert.toByte())
         if (modelType == ModelType.CPC) {
-            note.setDuration("q")
+            note.duration = "q".toLong()
         }
         return note
     }
@@ -73,7 +75,7 @@ open class MusicGenerator(
         }
         val pattern = Pattern()
         for (el in noteList )
-            pattern.add(el)
+            pattern.addElement(el)
 
         return pattern
     }

@@ -56,5 +56,15 @@
       <option name="name" value="maven4" />
       <option name="url" value="https://github.com/kshoji/USB-MIDI-Driver/raw/master/MIDIDriver/snapshots" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven5" />
+      <option name="name" value="maven5" />
+      <option name="url" value="https://github.com/kshoji/USB-MIDI-Driver/raw/master/library/repository" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="https://github.com/kshoji/BLE-MIDI-for-Android/raw/master/library/repository" />
+    </remote-repository>
   </component>
 </project>

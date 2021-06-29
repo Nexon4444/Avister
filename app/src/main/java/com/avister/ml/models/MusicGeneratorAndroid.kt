@@ -6,8 +6,10 @@ import android.util.Log
 import android.util.Size
 import com.avister.utilities.ConfigurationManager
 import com.beust.klaxon.Klaxon
-import org.jfugue.midi.MidiFileManager
-import org.jfugue.pattern.Pattern
+import org.jfugue.Pattern
+import org.jfugue.Player
+//import org.jfugue.midi.MidiFileManager
+//import org.jfugue.pattern.Pattern
 import org.tensorflow.lite.Delegate
 import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.Tensor
@@ -106,7 +108,9 @@ class MusicGeneratorAndroid(
 //        val  x= pattern.z
 //        val midiFileManager = MidiFileManager()
         try {
-            MidiFileManager.savePatternToMidi(pattern, File(pathname))
+            val player = Player()
+            player.saveMidi(pattern, File(pathname))
+//            MidiFileManager.savePatternToMidi(pattern, File(pathname))
         } catch (e: Exception) {
             throw e
         }

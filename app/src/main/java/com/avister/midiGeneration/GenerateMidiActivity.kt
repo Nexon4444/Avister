@@ -10,8 +10,10 @@ import com.avister.ml.models.ModelType
 import com.avister.ml.models.MusicGenerator
 import com.avister.ml.models.MusicGeneratorAndroid
 import com.avister.utilities.ConfigurationManager
-import org.jfugue.midi.MidiFileManager
-import org.jfugue.pattern.Pattern
+import org.jfugue.Pattern
+import org.jfugue.Player
+//import org.jfugue.midi.MidiFileManager
+//import org.jfugue.pattern.Pattern
 import java.io.File
 
 
@@ -40,7 +42,9 @@ class GenerateMidiActivity : AppCompatActivity() {
         val pattern: Pattern = musicGeneratorAndroid.generateMidiPattern(8, sead)
 //        val file = File(Environment.getExternalStorageDirectory(), )
 //        pattern.savePattern(file)
-        MidiFileManager.savePatternToMidi(pattern.setTempo(tempo).repeat(repeat), file)
+        val player = Player()
+        player.saveMidi(pattern, file)
+//        MidiFileManager.savePatternToMidi(pattern.setTempo(tempo).repeat(repeat), file)
         return (pattern to file)
     }
 
@@ -49,7 +53,9 @@ class GenerateMidiActivity : AppCompatActivity() {
         val directory = cw.getExternalFilesDir(Environment.DIRECTORY_MUSIC)
         val pattern: Pattern = Pattern("C4")
         val file = File(directory, "test.midi")
-        MidiFileManager.savePatternToMidi(pattern, file)
+        val player = Player()
+        player.saveMidi(pattern, file)
+//        MidiFileManager.savePatternToMidi(pattern, file)
     }
 
 }

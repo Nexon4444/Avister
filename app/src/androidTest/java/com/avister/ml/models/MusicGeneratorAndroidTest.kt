@@ -5,7 +5,8 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.avister.midiGeneration.GenerateMidiActivity
 import com.avister.utilities.ConfigurationManager
-import org.jfugue.theory.Note
+import org.jfugue.Note
+//import org.jfugue.theory.Note
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

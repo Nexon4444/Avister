@@ -5,12 +5,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 repositories {
-    maven { url 'https://github.com/joytunes/USB-MIDI-Driver/raw/master/MIDIDriver/snapshots'}
+    maven { url 'https://github.com/joytunes/USB-MIDI-Driver/raw/master/MIDIDriver/snapshots' }
 //    maven { url 'https://github.com/kshoji/javax.sound.midi-for-Android/raw/master/javax.sound.midi/repository' }
     maven { url 'https://github.com/kshoji/JFugue-for-Android/raw/master/jfugue-android/snapshot' }
-    maven { url 'https://github.com/kshoji/USB-MIDI-Driver/raw/master/MIDIDriver/snapshots' }
-
+    maven { url 'https://github.com/kshoji/BLE-MIDI-for-Android/raw/master/library/repository' }
+    maven { url 'https://github.com/kshoji/USB-MIDI-Driver/raw/master/library/repository' }
     maven { url "https://kotlin.bintray.com/kotlin-datascience" }
+    maven { url 'https://jitpack.io' }
     mavenCentral()
 }
 
@@ -74,6 +75,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'jp.kshoji:midi-driver:0.1.5:@aar'
+    implementation 'jp.kshoji:ble-midi:0.0.9:@aar'
 //    implementation 'andwroidx.preference:preference:1.1.1'
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.beust:klaxon:5.5'
@@ -83,13 +85,16 @@ dependencies {
     implementation "androidx.annotation:annotation:1.2.0"
     implementation "com.google.android.material:material:1.3.0"
     implementation "androidx.constraintlayout:constraintlayout:2.0.4"
-//    implementation 'org.jetbrains:kotlin-numpy:0.1.5'
-    implementation 'jp.kshoji:jfugue-android:5.0.1.201503:@aar'
+//    implementation 'org.jetbrains:kotlin-numpy:0.1.5 '
+//    implementation 'jp.kshoji:jfugue-android:5.0.1.201503:@aar'
+    implementation 'jp.kshoji:jfugue-android:4.0.3:@aar'
+
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 //    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.13.+"
     // https://mvnrepository.com/artifact/jfugue/jfugue
 //    implementation 'com.github.JensPiegsa:jfugue:5.0.9'
+    implementation 'com.github.LeffelMania:android-midi-lib:f8f2a6645'
 
     testImplementation 'org.mockito:mockito-inline:2.8.47'
     testImplementation 'org.mockito:mockito-core:3.9.0'
