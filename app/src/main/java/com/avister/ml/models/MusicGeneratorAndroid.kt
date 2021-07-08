@@ -101,6 +101,7 @@ class MusicGeneratorAndroid(
         return Pattern(midiString)
     }
 
+
     fun createMidiFile(noteList: List<String>, pathname: String) {
 //        val player = Player()
         val patternString = createMidiPattern(noteList)
@@ -178,6 +179,6 @@ class MusicGeneratorAndroid(
 }
 
 fun FloatArray.argMax(): Int {
-    return this.withIndex().maxBy { it.value }?.index
+    return this.withIndex().maxByOrNull { it.value }?.index
         ?: throw IllegalArgumentException("Cannot find arg max in empty list")
 }

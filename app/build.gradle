@@ -12,19 +12,19 @@ repositories {
     maven { url 'https://github.com/kshoji/USB-MIDI-Driver/raw/master/library/repository' }
     maven { url "https://kotlin.bintray.com/kotlin-datascience" }
     maven { url 'https://jitpack.io' }
-    mavenCentral()
+
 }
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "30.0.3"
+    compileSdkVersion 30
+    buildToolsVersion '31.0.0 rc3'
     aaptOptions {
         noCompress "tflite"
     }
     defaultConfig {
         applicationId 'com.avister'
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -71,13 +71,15 @@ android {
 }
 
 dependencies {
+//    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:gradle-wrapper.properties:$kotlin_version"
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'jp.kshoji:midi-driver:0.1.5:@aar'
     implementation 'jp.kshoji:ble-midi:0.0.9:@aar'
 //    implementation 'andwroidx.preference:preference:1.1.1'
-    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:design:30.0.0'
     implementation 'com.beust:klaxon:5.5'
     // For the navigation drawer
     implementation "com.mikepenz:materialdrawer:7.0.0-rc01"

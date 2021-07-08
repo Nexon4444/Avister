@@ -92,6 +92,7 @@ class ChooseSongActivity : TabActivity() {
         try {
             val settings = getSharedPreferences("avister.player.recentFiles", 0)
             val editor = settings.edit()
+
             val prevRecentFiles: JSONArray
             val recentFilesString = settings.getString("recentFiles", null)
             prevRecentFiles = recentFilesString?.let { JSONArray(it) } ?: JSONArray()

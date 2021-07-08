@@ -9,136 +9,131 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  */
+package com.avister.player
 
-package com.avister.player;
-
-import android.app.ListActivity;
-import android.content.ContentResolver;
-import android.content.res.AssetManager;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import com.avister.R;
-import com.avister.navigation.ChooseSongActivity;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-
+import com.avister.navigation.ChooseSongActivity.Companion.openFile
+import android.os.AsyncTask
+import com.avister.player.FileUri
+import com.avister.player.AllSongsActivity
+import android.os.Environment
+import android.widget.Toast
+import kotlin.Throws
+import android.app.ListActivity
+import android.text.TextWatcher
+import android.widget.EditText
+import com.avister.player.ScanMidiFiles
+import com.avister.player.IconArrayAdapter
+import android.os.Bundle
+import com.avister.R
+import android.provider.MediaStore
+import android.content.res.AssetManager
+import android.content.ContentResolver
+import android.content.ContextWrapper
+import android.net.Uri
+import com.avister.navigation.ChooseSongActivity
+import android.text.Editable
+import android.text.InputType
+import android.view.View
+import android.widget.ListView
+import androidx.core.net.toUri
+import com.avister.utilities.ConfigurationManager
+import java.io.File
+import java.io.IOException
+import java.lang.Exception
+import java.util.*
 
 /**
  * ScanMidiFiles class is used to scan for midi files
  * on a background thread.
  */
-class ScanMidiFiles extends AsyncTask<Integer, Integer, ArrayList<FileUri> > {
-    private ArrayList<FileUri> songlist;
-    private File rootdir;
-    private AllSongsActivity activity;
-
-    public ScanMidiFiles() {
+class ScanMidiFiles : AsyncTask<Int?, Int?, ArrayList<FileUri>?>() {
+    private var songlist: ArrayList<FileUri>? = null
+    private var rootdir: File? = null
+    private var activity: AllSongsActivity? = null
+    fun setActivity(activity: AllSongsActivity?) {
+        this.activity = activity
     }
 
-    public void setActivity(AllSongsActivity activity) {
-        this.activity = activity;
-    }
-
-    @Override
-    protected void onPreExecute() {
-        songlist = new ArrayList<FileUri>();
+    override fun onPreExecute() {
+        songlist = ArrayList()
         try {
-            rootdir = Environment.getExternalStorageDirectory();
-            Toast message = Toast.makeText(activity, "Scanning " + rootdir.getAbsolutePath() + " for MIDI files", Toast.LENGTH_SHORT);
-            message.show();
+            rootdir = Environment.getExternalStorageDirectory()
+            val message = Toast.makeText(
+                activity,
+                "Scanning " + rootdir?.getAbsolutePath() + " for MIDI files",
+                Toast.LENGTH_SHORT
+            )
+            message.show()
+        } catch (e: Exception) {
         }
-        catch (Exception e) {}
     }
 
-    @Override
-    protected ArrayList<FileUri> doInBackground(Integer... params) {
+    protected override fun doInBackground(vararg params: Int?): ArrayList<FileUri>? {
         if (rootdir == null) {
-            return songlist;
+            return songlist
         }
         try {
-            loadMidiFilesFromDirectory(rootdir, 1);
+            loadMidiFilesFromDirectory(rootdir!!, 1)
+        } catch (e: Exception) {
         }
-        catch (Exception e) {
-        }
-        return songlist;
+        return songlist
     }
 
-    @Override
-    protected void onProgressUpdate(Integer... progress) {
+    protected override fun onProgressUpdate(vararg progress: Int?) {}
+    override fun onPostExecute(result: ArrayList<FileUri>?) {
+        val act = activity
+        activity = null
+        act!!.scanDone(songlist)
+        val message =
+            Toast.makeText(act, "Found " + songlist!!.size + " MIDI files", Toast.LENGTH_SHORT)
+        message.show()
     }
 
-    @Override
-    protected void onPostExecute(ArrayList<FileUri> result) {
-        AllSongsActivity act = activity;
-        this.activity = null;
-        act.scanDone(songlist);
-        Toast message = Toast.makeText(act, "Found " + songlist.size() + " MIDI files", Toast.LENGTH_SHORT);
-        message.show();
-    }
-
-    @Override
-    protected void onCancelled() {
-        this.activity = null;
+    override fun onCancelled() {
+        activity = null
     }
 
     /* Given a directory, add MIDI files (ending in .mid) to the songlist.
      * If the directory contains subdirectories, call this method recursively.
      */
-    private void loadMidiFilesFromDirectory(File dir, int depth) throws IOException {
-        if (isCancelled()) {
-            return;
+    @Throws(IOException::class)
+    private fun loadMidiFilesFromDirectory(dir: File, depth: Int) {
+        if (isCancelled) {
+            return
         }
         if (depth > 10) {
-            return;
+            return
         }
-        File[] files = dir.listFiles();
-        if (files == null) {
-            return;
-        }
-        for (File file : files) {
+        val files = dir.listFiles() ?: return
+        for (file in files) {
             if (file == null) {
-                continue;
+                continue
             }
-            if (isCancelled()) {
-                return;
+            if (isCancelled) {
+                return
             }
-            if (file.getName().endsWith(".mid") || file.getName().endsWith(".MID") ||
-                file.getName().endsWith(".midi")) {
-                Uri uri = Uri.parse("file://" + file.getAbsolutePath());
-                String displayName = uri.getLastPathSegment();
-                FileUri song = new FileUri(uri, displayName);
-                songlist.add(song);
+            if (file.name.endsWith(".mid") || file.name.endsWith(".MID") ||
+                file.name.endsWith(".midi")
+            ) {
+                val uri = Uri.parse("file://" + file.absolutePath)
+                val displayName = uri.lastPathSegment
+                val song = FileUri(uri, displayName)
+                songlist!!.add(song)
             }
         }
-        for (File file : files) {
-            if (isCancelled()) {
-                return;
+        for (file in files) {
+            if (isCancelled) {
+                return
             }
             try {
-                if (file.isDirectory()) {
-                    loadMidiFilesFromDirectory(file, depth+1);
+                if (file.isDirectory) {
+                    loadMidiFilesFromDirectory(file, depth + 1)
                 }
+            } catch (e: Exception) {
             }
-            catch (Exception e) {}
         }
     }
 }
-
 
 /**
  * AllSongsActivity is used to display a list of
@@ -146,207 +141,184 @@ class ScanMidiFiles extends AsyncTask<Integer, Integer, ArrayList<FileUri> > {
  * shipped with avister.player (in the assets directory), and
  * also by searching for midi files in the internal/external
  * device storage.
- * <br/><br/>
- * When a song is chosen, this calls the SheetMusicAcitivty, passing
+ * <br></br><br></br>
+ * When a song is chosen, this calls the SheetMusicActivity, passing
  * the raw midi byte[] data as a parameter in the Intent.
  */
-public class AllSongsActivity extends ListActivity implements TextWatcher {
+class AllSongsActivity : ListActivity(), TextWatcher {
+    /** The complete list of midi files  */
+    var songlist: ArrayList<FileUri>? = null
 
-    /** The complete list of midi files */
-    ArrayList<FileUri> songlist;
+    /** Textbox to filter the songs by name  */
+    var filterText: EditText? = null
 
-    /** Textbox to filter the songs by name */
-    EditText filterText;
-
-    /** Task to scan for midi files */
-    ScanMidiFiles scanner;
-
-    IconArrayAdapter<FileUri> adapter;
+    /** Task to scan for midi files  */
+    var scanner: ScanMidiFiles? = null
+    private var adapter: IconArrayAdapter<FileUri>? = null
 
     /* When this activity changes orientation, save the songlist,
      * so we don't have to re-scan for midi songs.
      */
-    @Override
-    public Object onRetainNonConfigurationInstance() {
-        return songlist;
+    override fun onRetainNonConfigurationInstance(): Any {
+        return songlist!!
     }
 
-
-    @Override
-    public void onCreate(Bundle state) {
-        super.onCreate(state);
-        setContentView(R.layout.choose_song);
-        setTitle("avister.player: Choose Song");
+    public override fun onCreate(state: Bundle?) {
+        super.onCreate(state)
+        setContentView(R.layout.choose_song)
+        title = "avister.player: Choose Song"
 
         /* If we're restarting from an orientation change,
          * load the saved song list.
-         */
-        songlist = (ArrayList<FileUri>) getLastNonConfigurationInstance();
+         */songlist = lastNonConfigurationInstance as ArrayList<FileUri>?
         if (songlist != null) {
-            adapter = new IconArrayAdapter<FileUri>(this, android.R.layout.simple_list_item_1, songlist);
-            this.setListAdapter(adapter);
+            adapter = IconArrayAdapter(this, android.R.layout.simple_list_item_1, songlist)
+            this.listAdapter = adapter
         }
     }
 
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (songlist == null || songlist.size() == 0) {
-            songlist = new ArrayList<>();
-            loadAssetMidiFiles();
-            loadMidiFilesFromProvider(MediaStore.Audio.Media.INTERNAL_CONTENT_URI);
-            loadMidiFilesFromProvider(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+    public override fun onResume() {
+        super.onResume()
+        if (songlist == null || songlist!!.size == 0) {
+            songlist = ArrayList()
+            loadAssetMidiFiles()
+            val conf = ConfigurationManager(this)
+            val cw = ContextWrapper(applicationContext)
+            val mainMusicDir = cw.getExternalFilesDir(conf["mainMusicDir"])?.toUri()?.getPath()
+            loadMidiFilesFromProvider(Uri.parse(mainMusicDir))
+            loadMidiFilesFromProvider(MediaStore.Audio.Media.INTERNAL_CONTENT_URI)
+            loadMidiFilesFromProvider(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI)
 
             // Sort the songlist by name
-            if (songlist.size() > 0) {
-                Collections.sort(songlist, songlist.get(0));
+            if (songlist!!.size > 0) {
+                Collections.sort(songlist, songlist!![0])
             }
 
             // Remove duplicates
-            ArrayList<FileUri> origlist = songlist;
-            songlist = new ArrayList<>();
-            String prevname = "";
-            for (FileUri file : origlist) {
-                if (!file.toString().equals(prevname)) {
-                    songlist.add(file);
+            val origlist: ArrayList<FileUri> = songlist as ArrayList<FileUri>
+            songlist = ArrayList()
+            var prevname = ""
+            for (file in origlist) {
+                if (file.toString() != prevname) {
+                    songlist!!.add(file)
                 }
-                prevname = file.toString();
+                prevname = file.toString()
             }
-
-            adapter = new IconArrayAdapter<FileUri>(this, android.R.layout.simple_list_item_1, songlist);
-            this.setListAdapter(adapter);
+            adapter = IconArrayAdapter(this, android.R.layout.simple_list_item_1, songlist)
+            this.listAdapter = adapter
         }
-        filterText = (EditText) findViewById(R.id.name_filter);
-        filterText.addTextChangedListener(this);
-        filterText.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        filterText = findViewById<View>(R.id.name_filter) as EditText
+        filterText!!.addTextChangedListener(this)
+        filterText!!.inputType = InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
     }
-
 
     /** Scan the SD card for midi songs.  Since this is a lengthy
-     *  operation, perform the scan in a background thread.
+     * operation, perform the scan in a background thread.
      */
-    public void scanForSongs() {
+    fun scanForSongs() {
         if (scanner != null) {
-            return;
+            return
         }
-        scanner = new ScanMidiFiles();
-        scanner.setActivity(this);
-        scanner.execute(0);
+        scanner = ScanMidiFiles()
+        scanner!!.setActivity(this)
+        scanner!!.execute(0)
     }
 
-    public void scanDone(ArrayList<FileUri> newfiles) {
+    fun scanDone(newfiles: ArrayList<FileUri>?) {
         if (songlist == null || newfiles == null) {
-            return;
+            return
         }
-        songlist.addAll(newfiles);
+        songlist!!.addAll(newfiles)
         // Sort the songlist by name
-        Collections.sort(songlist, songlist.get(0));
+        Collections.sort(songlist, songlist!![0])
 
         // Remove duplicates
-        ArrayList<FileUri> origlist = songlist;
-        songlist = new ArrayList<FileUri>();
-        String prevname = "";
-        for (FileUri file : origlist) {
-            if (!file.toString().equals(prevname)) {
-                songlist.add(file);
+        val origlist: ArrayList<FileUri> = songlist as ArrayList<FileUri>
+        songlist = ArrayList()
+        var prevname = ""
+        for (file in origlist) {
+            if (file.toString() != prevname) {
+                songlist!!.add(file)
             }
-            prevname = file.toString();
+            prevname = file.toString()
         }
-        adapter = new IconArrayAdapter<FileUri>(this, android.R.layout.simple_list_item_1, songlist);
-        this.setListAdapter(adapter);
-        scanner = null;
+        adapter = IconArrayAdapter(this, android.R.layout.simple_list_item_1, songlist as ArrayList<FileUri>)
+        this.listAdapter = adapter
+        scanner = null
     }
 
     /** Load all the sample midi songs from the assets directory into songlist.
-     *  Look for files ending with ".mid"
+     * Look for files ending with ".mid"
      */
-    void loadAssetMidiFiles() {
+    fun loadAssetMidiFiles() {
         try {
-            AssetManager assets = this.getResources().getAssets();
-            String[] files = assets.list("");
-            for (String path: files) {
-                if (path.endsWith(".mid")) {
-                    Uri uri = Uri.parse("file:///android_asset/" + path);
-                    FileUri file = new FileUri(uri, path);
-                    songlist.add(file);
+            val assets = this.resources.assets
+            val files = assets.list("")
+            for (path in files!!) {
+                if (path.endsWith(".midi")) {
+                    val uri = Uri.parse("file:///android_asset/$path")
+                    val file = FileUri(uri, path)
+                    songlist!!.add(file)
                 }
             }
-        }
-        catch (IOException e) {
+        } catch (e: IOException) {
         }
     }
-
 
     /** Look for midi files (with mime-type audio/midi) in the
      * internal/external storage. Add them to the songlist.
      */
-    private void loadMidiFilesFromProvider(Uri content_uri) {
-        ContentResolver resolver = getContentResolver();
-        String[] columns = {
-                MediaStore.Audio.Media._ID,
-                MediaStore.Audio.Media.TITLE,
-                MediaStore.Audio.Media.MIME_TYPE
-        };
-        String selection = MediaStore.Audio.Media.MIME_TYPE + " LIKE '%mid%'";
-        Cursor cursor = resolver.query(content_uri, columns, selection, null, null);
-        if (cursor == null) {
-            return;
-        }
+    private fun loadMidiFilesFromProvider(content_uri: Uri) {
+        val resolver = contentResolver
+        val columns = arrayOf(
+            MediaStore.Audio.Media._ID,
+            MediaStore.Audio.Media.TITLE,
+            MediaStore.Audio.Media.MIME_TYPE
+        )
+        val selection = MediaStore.Audio.Media.MIME_TYPE + " LIKE '%mid%'"
+        val cursor = resolver.query(content_uri, columns, selection, null, null) ?: return
         if (!cursor.moveToFirst()) {
-            cursor.close();
-            return;
+            cursor.close()
+            return
         }
-
         do {
-            int idColumn = cursor.getColumnIndex(MediaStore.Audio.Media._ID);
-            int titleColumn = cursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
-            int mimeColumn = cursor.getColumnIndex(MediaStore.Audio.Media.MIME_TYPE);
-
-            long id = cursor.getLong(idColumn);
-            String title = cursor.getString(titleColumn);
-            String mime = cursor.getString(mimeColumn);
-
+            val idColumn = cursor.getColumnIndex(MediaStore.Audio.Media._ID)
+            val titleColumn = cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)
+            val mimeColumn = cursor.getColumnIndex(MediaStore.Audio.Media.MIME_TYPE)
+            val id = cursor.getLong(idColumn)
+            val title = cursor.getString(titleColumn)
+            val mime = cursor.getString(mimeColumn)
             if (mime.endsWith("/midi") || mime.endsWith("/mid")) {
-                Uri uri = Uri.withAppendedPath(content_uri, "" + id);
-                FileUri file = new FileUri(uri, title);
-                songlist.add(file);
+                val uri = Uri.withAppendedPath(content_uri, "" + id)
+                val file = FileUri(uri, title)
+                songlist!!.add(file)
             }
-        } while (cursor.moveToNext());
-        cursor.close();
+        } while (cursor.moveToNext())
+        cursor.close()
     }
 
     /** When a song is clicked on, start a SheetMusicActivity.
-     *  Read the raw byte[] data of the midi file.
-     *  Pass the raw byte[] data as a parameter in the Intent.
-     *  Pass the midi file Title as a parameter in the Intent.
+     * Read the raw byte[] data of the midi file.
+     * Pass the raw byte[] data as a parameter in the Intent.
+     * Pass the midi file Title as a parameter in the Intent.
      */
-    @Override
-    protected void onListItemClick(ListView parent, View view, int position, long id) {
-        super.onListItemClick(parent, view, position, id);
+    override fun onListItemClick(parent: ListView, view: View, position: Int, id: Long) {
+        super.onListItemClick(parent, view, position, id)
         if (scanner != null) {
-            scanner.cancel(true);
-            scanner = null;
+            scanner!!.cancel(true)
+            scanner = null
         }
-        FileUri file = (FileUri) this.getListAdapter().getItem(position);
-        ChooseSongActivity.openFile(file);
+        val file = this.listAdapter.getItem(position) as FileUri
+        openFile(file)
     }
-
 
     /** As text is entered in the filter box, filter the list of
-     *  midi songs to display.
+     * midi songs to display.
      */
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-        adapter.getFilter().filter(s);
+    override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+        adapter!!.filter.filter(s)
     }
 
-    @Override
-    public void afterTextChanged(Editable s) {
-    }
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-    }
+    override fun afterTextChanged(s: Editable) {}
+    override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 }
-

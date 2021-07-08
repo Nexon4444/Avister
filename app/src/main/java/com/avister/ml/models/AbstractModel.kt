@@ -64,7 +64,7 @@ abstract class AbstractModel(mappedByteBuffer: MappedByteBuffer, device: Device 
 
 
         fun List<Int>.toOneHot(): List<List<Int>> {
-            val max = this.max() //maxOrNull()
+            val max = this.maxOrNull()
 
             return if (max != null) {
                 listOf(this.map {

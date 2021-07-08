@@ -121,17 +121,17 @@ internal class MusicGeneratorAndroidTest {
 
     }
 
-    @Test
-    fun createNoteOrChordFromStringTest(){
-        testOnActivity {
-            val testString1 = "C4"
-            val configurationManager = ConfigurationManager(it)
-            val musicGeneratorAndroid =
-                MusicGeneratorAndroid(it, configurationManager["modelFileName"], ModelType.CPC)
-
-            val note: Note = musicGeneratorAndroid.createNoteOrChordFromString(testString1)
-            assert(note.value == "C4".toByte())
-        }
+//    @Test
+//    fun createNoteOrChordFromStringTest(){
+//        testOnActivity {
+//            val testString1 = "C4"
+//            val configurationManager = ConfigurationManager(it)
+//            val musicGeneratorAndroid =
+//                MusicGeneratorAndroid(it, configurationManager["modelFileName"], ModelType.CPC)
+//
+//            val note: Note = musicGeneratorAndroid.createNoteOrChordFromString(testString1)
+//            assert(note.value == "C4".toByte())
+//        }
 
     }
 

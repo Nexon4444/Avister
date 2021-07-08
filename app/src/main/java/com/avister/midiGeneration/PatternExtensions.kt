@@ -14,8 +14,8 @@ import com.leff.midi.event.meta.TimeSignature
 import org.jfugue.Pattern
 import java.io.File
 import java.io.IOException
-typealias Note = String
-val durationMap = {
+typealias Music = String
+val durationMap = run {
     val max = 1920L
     mapOf(
         "w" to max,
@@ -27,9 +27,9 @@ val durationMap = {
         "x" to max / 64,
         "o" to max / 128
     )
-}.invoke()
+}
 
-val midiMap: Map<String, Int> = {
+val midiMap: Map<String, Int> = run {
     val notes = listOf("A", "B-", "B", "C", "C#", "D", "E-", "E", "F", "F#", "G", "G#")
     val completeNotesList = (0..8).flatMap { notes }.subList(0, 88)
     val octavesList = listOf(
@@ -50,8 +50,9 @@ val midiMap: Map<String, Int> = {
     val intPitch = 21..108
     val notePitchPairs = completeNotesListWithOctaves.zip(intPitch)
     val mapNoteToInt = notePitchPairs.associateBy({ it.first }, { it.second })
+//    val completeNotesList = octavesList.flatMap { octaveN -> notes.map { note -> note + octaveN } }
     mapNoteToInt
-}.invoke()
+}
 
 //fun createMidiMap(): Map<String, Int> {
 //    val notes = listOf("A", "B-", "B", "C", "C#", "D", "E-", "E", "F", "F#", "G", "G#")

@@ -24,6 +24,15 @@ internal class ConfigurationManagerTest {
     }
 
     @Test
+    fun MusicDirectoryTest() {
+        activityTestRule.scenario.onActivity {
+            val configurationManager = ConfigurationManager(it)
+            val musicDir = configurationManager["mainMusicDir"]
+            assert(musicDir != "")
+        }
+
+    }
+    @Test
     fun ModelFileNameTest() {
         activityTestRule.scenario.onActivity {
             val configurationManager = ConfigurationManager(it)

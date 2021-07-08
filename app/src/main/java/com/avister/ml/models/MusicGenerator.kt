@@ -51,17 +51,28 @@ open class MusicGenerator(
         return networkInputIntArray to normalizedInputFloatArray
     }
 
-    fun createNote(noteToConvert: String): Note {
-//        if ()
-        val note = Note(noteToConvert.toByte())
-//        val note = Note(noteToConvert.toByte())
-        if (modelType == ModelType.CPC) {
-            note.duration = "q".toLong()
+//    fun createPattern(noteToConvert: String): Pattern {
+////        if ()
+//        val note = Chord(noteToConvert)
+////        val note = Note(noteToConvert.toByte())
+//        if (modelType == ModelType.CPC) {
+//            note.setDuration("q")
+//        }
+//        return note
+//    }
+
+    fun createMusicStringAccordingToModel(noteList: List<Music>): String {
+        return when(modelType) {
+            ModelType.CPC -> cpcImplementation(noteList)
         }
-        return note
     }
 
-    fun createNoteOrChordFromString(notesString: String): Note =
+    private fun cpcImplementation(noteList: List<Music>): String {
+        val normal = "q"
+        return noteList.joinToString("$normal+") + "q"
+    }
+
+    fun createNoteOrChordFromString(notesString: String): Pattern =
         if (notesString.contains(".") || notesString.isDigitsOnly()) {
             val notesList = notesString.split('.')
 //            val chordList= notesList.map { createNoteFromIntString(translateString2Int(it)) }
