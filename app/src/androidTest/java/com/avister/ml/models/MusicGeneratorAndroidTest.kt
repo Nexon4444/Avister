@@ -5,7 +5,7 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.avister.midiGeneration.GenerateMidiActivity
 import com.avister.utilities.ConfigurationManager
-import org.jfugue.Note
+import org.jfugue.theory.Note
 //import org.jfugue.theory.Note
 import org.junit.Before
 import org.junit.Rule
@@ -135,12 +135,12 @@ internal class MusicGeneratorAndroidTest {
 
     }
 
-    @Test
-    fun dubSaveTest() {
-        activityTestRule.scenario.onActivity {
-            it.exampleSave()
-        }
-    }
+//    @Test
+//    fun dubSaveTest() {
+//        activityTestRule.scenario.onActivity {
+//            it.exampleSave()
+//        }
+
 //    @Test
 //    fun testGenerateRandomSequenceSize() {
 //        val generatedSequence = MusicGeneratorAndroid.generateRandomSequence(100, 10)
@@ -152,4 +152,4 @@ internal class MusicGeneratorAndroidTest {
 //        val generatedSequence = MusicGeneratorAndroid.generateRandomSequence(100, 10)
 //        assert(true) { generatedSequence.all { it in 1..9 }  }
 //    }
-}
+

@@ -23,7 +23,7 @@ internal class GenerateMidiActivityTest {
         }
 
     @Test
-    fun generateAndSavePattern() {
+    fun clickGenerateAndSavePattern() {
         testOnActivity {
             Espresso.onView(ViewMatchers.withId(R.id.generate_midi_button))
                 .perform(ViewActions.click())
@@ -37,8 +37,8 @@ internal class GenerateMidiActivityTest {
     fun generateSaveAndReadPattern() {
         testOnActivity {
             if (it is GenerateMidiActivity) {
-                it.generateAndSavePattern()
-                val file = File(Environment.getExternalStorageDirectory(), "/test.midi")
+                val file = it.generateAndSavePattern().second
+//                val file = File(Environment.getExternalStorageDirectory(), "/test.midi")
                 val inputStream: InputStream = file.inputStream()
                 val inputString = inputStream.bufferedReader().use { it.readText() }
             }

@@ -89,7 +89,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:2.0.4"
 //    implementation 'org.jetbrains:kotlin-numpy:0.1.5 '
 //    implementation 'jp.kshoji:jfugue-android:5.0.1.201503:@aar'
-    implementation 'jp.kshoji:jfugue-android:4.0.3:@aar'
+    implementation 'jp.kshoji:jfugue-android:5.0.1.201503:@aar'
 
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

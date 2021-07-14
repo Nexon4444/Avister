@@ -1,8 +1,11 @@
 package com.avister.ml.models
 
 import androidx.core.text.isDigitsOnly
-import org.jfugue.Note
-import org.jfugue.Pattern
+import com.avister.midiGeneration.Music
+import org.jfugue.pattern.Pattern
+import org.jfugue.theory.Chord
+import org.jfugue.theory.Note
+
 //import org.jfugue.pattern.Pattern
 //import org.jfugue.theory.Note
 import java.nio.MappedByteBuffer
@@ -77,8 +80,8 @@ open class MusicGenerator(
             val notesList = notesString.split('.')
 //            val chordList= notesList.map { createNoteFromIntString(translateString2Int(it)) }
             val chordList= notesList.map { it }
-            createNote(chordList.joinToString("+"))
-        } else createNote(notesString)
+            Pattern(createMusicStringAccordingToModel(chordList))
+        } else Pattern(createMusicStringAccordingToModel(listOf(notesString)))
 
     fun createMidiPattern(noteStringList: List<String>): Pattern {
         val noteList = noteStringList.map{
@@ -86,7 +89,7 @@ open class MusicGenerator(
         }
         val pattern = Pattern()
         for (el in noteList )
-            pattern.addElement(el)
+            pattern.add(el)
 
         return pattern
     }

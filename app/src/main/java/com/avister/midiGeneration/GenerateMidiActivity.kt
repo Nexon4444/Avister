@@ -10,8 +10,8 @@ import com.avister.ml.models.ModelType
 import com.avister.ml.models.MusicGenerator
 import com.avister.ml.models.MusicGeneratorAndroid
 import com.avister.utilities.ConfigurationManager
-import org.jfugue.Pattern
-import org.jfugue.Player
+import com.avister.utilities.currentDateTimeAsString
+import org.jfugue.pattern.Pattern
 //import org.jfugue.midi.MidiFileManager
 //import org.jfugue.pattern.Pattern
 import java.io.File
@@ -38,24 +38,25 @@ class GenerateMidiActivity : AppCompatActivity() {
 
         val cw = ContextWrapper(applicationContext)
         val directory = cw.getExternalFilesDir(Environment.DIRECTORY_MUSIC)
-        val file = File(directory, "/test.midi")
-        val pattern: Pattern = musicGeneratorAndroid.generateMidiPattern(8, sead)
+//        val file = File(directory, "/test.midi")
+        val pattern: Pattern = musicGeneratorAndroid.generateMidiPattern(24, sead)
 //        val file = File(Environment.getExternalStorageDirectory(), )
 //        pattern.savePattern(file)
-        val player = Player()
-        player.saveMidi(pattern, file)
+        val file = pattern.saveAsMidi(this, filesDir, "sheet_" + currentDateTimeAsString() + ".mid")
+//        val player = Player()
+//        player.saveMidi(pattern, file)
 //        MidiFileManager.savePatternToMidi(pattern.setTempo(tempo).repeat(repeat), file)
         return (pattern to file)
     }
 
-    fun exampleSave() {
-        val cw = ContextWrapper(applicationContext)
-        val directory = cw.getExternalFilesDir(Environment.DIRECTORY_MUSIC)
-        val pattern: Pattern = Pattern("C4")
-        val file = File(directory, "test.midi")
-        val player = Player()
-        player.saveMidi(pattern, file)
-//        MidiFileManager.savePatternToMidi(pattern, file)
-    }
+//    fun exampleSave() {
+//        val cw = ContextWrapper(applicationContext)
+//        val directory = cw.getExternalFilesDir(Environment.DIRECTORY_MUSIC)
+//        val pattern: Pattern = Pattern("C4")
+//        val file = File(directory, "test.midi")
+//        val player = Player()
+//        player.saveMidi(pattern, file)
+////        MidiFileManager.savePatternToMidi(pattern, file)
+//    }
 
 }

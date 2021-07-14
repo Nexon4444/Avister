@@ -6,8 +6,7 @@ import android.util.Log
 import android.util.Size
 import com.avister.utilities.ConfigurationManager
 import com.beust.klaxon.Klaxon
-import org.jfugue.Pattern
-import org.jfugue.Player
+import org.jfugue.pattern.Pattern
 //import org.jfugue.midi.MidiFileManager
 //import org.jfugue.pattern.Pattern
 import org.tensorflow.lite.Delegate
@@ -102,20 +101,20 @@ class MusicGeneratorAndroid(
     }
 
 
-    fun createMidiFile(noteList: List<String>, pathname: String) {
-//        val player = Player()
-        val patternString = createMidiPattern(noteList)
-        val pattern = Pattern(patternString)
-//        val  x= pattern.z
-//        val midiFileManager = MidiFileManager()
-        try {
-            val player = Player()
-            player.saveMidi(pattern, File(pathname))
-//            MidiFileManager.savePatternToMidi(pattern, File(pathname))
-        } catch (e: Exception) {
-            throw e
-        }
-    }
+//    fun createMidiFile(noteList: List<Str ing>, pathname: String) {
+////        val player = Player()
+//        val patternString = createMidiPattern(noteList)
+//        val pattern = Pattern(patternString)
+////        val  x= pattern.z
+////        val midiFileManager = MidiFileManager()
+//        try {
+//            val player = Player()
+//            player.saveMidi(pattern, File(pathname))
+////            MidiFileManager.savePatternToMidi(pattern, File(pathname))
+//        } catch (e: Exception) {
+//            throw e
+//        }
+//    }
 
     fun convertIntNoteToFloat(note: Int) {
 
