@@ -1,25 +1,59 @@
+
+
+
 package com.avister.utilities
 
 import android.Manifest
-import android.content.ContentUris
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
-import android.provider.MediaStore
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.avister.R
-import java.security.Permission
+import com.avister.midiGeneration.saveAsMidi
+import org.jfugue.pattern.Pattern
+import java.io.File
+import java.io.FileOutputStream
 
 class TestingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_testing)
-        testUti()
+//        testSave()
+//        val filename = "test.txt"
+//        val outUri = filesDir.toString() + File.separator + filename
+//        val outFile = File(outUri)
+//        val isCreated = outFile.createNewFile()
+//        val x = "s"
+        patternSaveAsMidiWithChordsTest()
+    }
+    fun patternSaveAsMidiWithChordsTest() {
+//        testOnActivity {
+            val noteString =
+                listOf("C5q+E-5q+G5q", "D5q", "E5q", "F5q", "G5q", "A5q", "B5q", "C6q").joinToString(" ")
+            val pattern = Pattern(noteString)
+            pattern.saveAsMidi(this, this.filesDir, "test2.midi")
     }
 
+    fun testSave(){
+        val file = File("$filesDir/folderName")
+        if (!file.exists()) {
+            file.mkdirs()
+        }
+        val data = "this is my first insert data"
+        val myappFile = File(
+            file
+                .toString() + File.separator + "myapp2.txt"
+        )
+
+        val x = myappFile.createNewFile()
+        val y = 3
+//        val fos = FileOutputStream(myappFile)
+//        fos.write(data.toByteArray())
+//        fos.close()
+    }
     fun testUti() {
         val mainMusicDir = Environment.DIRECTORY_MUSIC
 //        val mainMusicDir = Uri.parse(".")
@@ -31,6 +65,13 @@ class TestingActivity : AppCompatActivity() {
 //        val rPath: Uri = ContentUris.withAppendedId(filesDir.toUri(), 1)
         val path = filesDir.toUri()
         val auth = path.authority
+
+        val directory: File = File(filesDir.toString())
+        val files = directory.listFiles()
+//        Log.d("Files", "Size: " + files.size)
+        for (i in files.indices) {
+            val x = files[i].name
+        }
 //        getResolver()
 //        val permissions = arrayOf()
 //        val path = Uri.parse(Environment.getRootDirectory().absolutePath)
@@ -56,5 +97,14 @@ class TestingActivity : AppCompatActivity() {
             cursor.close()
 
         }
+    }
+
+    fun loadMidiFilesFromProvider(contentUri: Uri) {
+        val f = File("$filesDir")
+        val q = f.list()
+        val fileList = f.listFiles()
+        val v = fileList[0]
+        val x = 3
+
     }
 }

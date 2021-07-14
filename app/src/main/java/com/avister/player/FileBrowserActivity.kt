@@ -150,7 +150,7 @@ class FileBrowserActivity : ListActivity() {
         super.onListItemClick(parent, view, position, id)
         val file = this.listAdapter.getItem(position) as FileUri
         if (file.isDirectory) {
-            val path = File(file.uri.path)
+            val path = File(file.uri.path!!)
             loadDirectory(path)
         } else {
             openFile(file)

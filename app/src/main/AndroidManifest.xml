@@ -19,18 +19,17 @@
         <activity android:name=".navigation.MainMenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".navigation.StartActivity"
-            android:theme="@style/SplashTheme"></activity>
+            android:theme="@style/SplashTheme">
+        </activity>
         <activity android:name=".navigation.ChooseSongActivity" />
         <activity android:name=".player.FileBrowserActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -42,7 +41,6 @@
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.SETTINGS" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -54,9 +52,7 @@
             android:theme="@style/PlayerTheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data
                     android:host="*"
                     android:mimeType="*/*"

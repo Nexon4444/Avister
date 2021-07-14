@@ -104,7 +104,7 @@ class ChooseSongActivity : TabActivity() {
                     break // only store 10 most recent files
                 }
                 val file = prevRecentFiles.getJSONObject(i)
-                if (!FileUri.equalJson(recentFileJson, file)) {
+                if (!FileUri.equalJson(recentFileJson!!, file)) {
                     recentFiles.put(file)
                 }
             }

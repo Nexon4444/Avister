@@ -13,24 +13,18 @@ package com.avister.player
 
 import com.avister.navigation.ChooseSongActivity.Companion.openFile
 import android.os.AsyncTask
-import com.avister.player.FileUri
-import com.avister.player.AllSongsActivity
 import android.os.Environment
 import android.widget.Toast
 import kotlin.Throws
 import android.app.ListActivity
 import android.text.TextWatcher
 import android.widget.EditText
-import com.avister.player.ScanMidiFiles
-import com.avister.player.IconArrayAdapter
 import android.os.Bundle
 import com.avister.R
 import android.provider.MediaStore
-import android.content.res.AssetManager
-import android.content.ContentResolver
 import android.content.ContextWrapper
 import android.net.Uri
-import com.avister.navigation.ChooseSongActivity
+import android.net.Uri.fromFile
 import android.text.Editable
 import android.text.InputType
 import android.view.View
@@ -185,11 +179,13 @@ class AllSongsActivity : ListActivity(), TextWatcher {
             val conf = ConfigurationManager(this)
             val cw = ContextWrapper(applicationContext)
             val mainMusicDir = cw.getExternalFilesDir(conf["mainMusicDir"])?.toUri()?.getPath()
-            loadMidiFilesFromProvider(Uri.parse(mainMusicDir))
-            loadMidiFilesFromProvider(MediaStore.Audio.Media.INTERNAL_CONTENT_URI)
-            loadMidiFilesFromProvider(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI)
+//            loadMidiFilesFromProvider(Uri.parse(mainMusicDir))
+            loadMidiFilesFromProvider(File("$filesDir"))
+//            loadMidiFilesFromProvider(MediaStore.Audio.Media.INTERNAL_CONTENT_URI)
+//            loadMidiFilesFromProvider(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI)
 
             // Sort the songlist by name
+//            songlist.sort()
             if (songlist!!.size > 0) {
                 Collections.sort(songlist, songlist!![0])
             }
@@ -215,6 +211,42 @@ class AllSongsActivity : ListActivity(), TextWatcher {
     /** Scan the SD card for midi songs.  Since this is a lengthy
      * operation, perform the scan in a background thread.
      */
+    private fun loadMidiFilesFromProvider(contentUri: File) {
+        val f= File(contentUri.toString())
+        val fileList = f.listFiles()
+        val columns = arrayOf(
+            MediaStore.Audio.Media._ID,
+            MediaStore.Audio.Media.TITLE,
+            MediaStore.Audio.Media.MIME_TYPE
+        )
+
+        val midiList = fileList.filter{it.name.endsWith("midi") || it.name.endsWith("mid")}
+        val y = 3
+        midiList.map { songlist!!.add(FileUri(it.toUri(), it.name)) }
+
+//        val selection = MediaStore.Audio.Media.MIME_TYPE + " LIKE '%mid%'"
+//        val cursor = resolver.query(content_uri, columns, selection, null, null) ?: return
+//        if (!cursor.moveToFirst()) {
+//            cursor.close()
+//            return
+//        }
+//        do {
+//            val idColumn = cursor.getColumnIndex(MediaStore.Audio.Media._ID)
+//            val titleColumn = cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)
+//            val mimeColumn = cursor.getColumnIndex(MediaStore.Audio.Media.MIME_TYPE)
+//            val id = cursor.getLong(idColumn)
+//            val title = cursor.getString(titleColumn)
+//            val mime = cursor.getString(mimeColumn)
+//            if (mime.endsWith("/midi") || mime.endsWith("/mid")) {
+//                val uri = Uri.withAppendedPath(content_uri, "" + id)
+//                val file = FileUri(uri, title)
+//                songlist!!.add(file)
+//            }
+//        } while (cursor.moveToNext())
+//        cursor.close()
+
+    }
+
     fun scanForSongs() {
         if (scanner != null) {
             return
@@ -268,34 +300,37 @@ class AllSongsActivity : ListActivity(), TextWatcher {
     /** Look for midi files (with mime-type audio/midi) in the
      * internal/external storage. Add them to the songlist.
      */
-    private fun loadMidiFilesFromProvider(content_uri: Uri) {
-        val resolver = contentResolver
-        val columns = arrayOf(
-            MediaStore.Audio.Media._ID,
-            MediaStore.Audio.Media.TITLE,
-            MediaStore.Audio.Media.MIME_TYPE
-        )
-        val selection = MediaStore.Audio.Media.MIME_TYPE + " LIKE '%mid%'"
-        val cursor = resolver.query(content_uri, columns, selection, null, null) ?: return
-        if (!cursor.moveToFirst()) {
-            cursor.close()
-            return
-        }
-        do {
-            val idColumn = cursor.getColumnIndex(MediaStore.Audio.Media._ID)
-            val titleColumn = cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)
-            val mimeColumn = cursor.getColumnIndex(MediaStore.Audio.Media.MIME_TYPE)
-            val id = cursor.getLong(idColumn)
-            val title = cursor.getString(titleColumn)
-            val mime = cursor.getString(mimeColumn)
-            if (mime.endsWith("/midi") || mime.endsWith("/mid")) {
-                val uri = Uri.withAppendedPath(content_uri, "" + id)
-                val file = FileUri(uri, title)
-                songlist!!.add(file)
-            }
-        } while (cursor.moveToNext())
-        cursor.close()
-    }
+
+//    private fun loadMidiFilesFromProvider(content_uri: Uri) {
+//        val resolver = contentResolver
+//        val columns = arrayOf(
+//            MediaStore.Audio.Media._ID,
+//            MediaStore.Audio.Media.TITLE,
+//            MediaStore.Audio.Media.MIME_TYPE
+//        )
+//        val selection = MediaStore.Audio.Media.MIME_TYPE + " LIKE '%mid%'"
+//        val cursor = resolver.query(content_uri, columns, selection, null, null) ?: return
+//        if (!cursor.moveToFirst()) {
+//            cursor.close()
+//            return
+//        }
+//        do {
+//            val idColumn = cursor.getColumnIndex(MediaStore.Audio.Media._ID)
+//            val titleColumn = cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)
+//            val mimeColumn = cursor.getColumnIndex(MediaStore.Audio.Media.MIME_TYPE)
+//            val id = cursor.getLong(idColumn)
+//            val title = cursor.getString(titleColumn)
+//            val mime = cursor.getString(mimeColumn)
+//            if (mime.endsWith("/midi") || mime.endsWith("/mid")) {
+//                val uri = Uri.withAppendedPath(content_uri, "" + id)
+//                val file = Uri(uri, title)
+//                songlist!!.add(file)
+//            }
+//        } while (cursor.moveToNext())
+//        cursor.close()
+//    }
+
+
 
     /** When a song is clicked on, start a SheetMusicActivity.
      * Read the raw byte[] data of the midi file.

@@ -6,7 +6,9 @@ package com.avister.midiGeneration
 //import org.jfugue.Tempo
 import android.content.Context
 import android.content.ContextWrapper
+import android.net.Uri
 import android.os.Environment
+import androidx.core.net.toUri
 import com.leff.midi.MidiFile
 import com.leff.midi.MidiTrack
 import com.leff.midi.event.meta.Tempo
@@ -102,17 +104,14 @@ fun Pattern.saveAsMidi(applicationContext: Context, filename: String) {
 
     val midi = MidiFile(MidiFile.DEFAULT_RESOLUTION, tracks)
 
-// 4. Write the MIDI data to a file
-
-// 4. Write the MIDI data to a file
-    val cw = ContextWrapper(applicationContext)
-    val directory = cw.getExternalFilesDir(Environment.DIRECTORY_MUSIC)
-//    val pattern: Pattern = Pattern("C4")
-    val output = File(directory, filename)
+    val outUri = Uri.parse(output.toString() + File.separator + filename)
+    val outFile = File(outUri.toString())
     try {
-        midi.writeToFile(output)
+        outFile.createNewFile()
+        midi.writeToFile(outFile)
     } catch (e: IOException) {
-        System.err.println(e)
+        throw e
+//        System.err.println(e)
     }
 }
 
