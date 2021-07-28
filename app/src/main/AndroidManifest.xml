@@ -9,21 +9,43 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity android:name=".markSightReading.TestSightReadingActivity"></activity>
-        <activity android:name=".midiGeneration.GenerateMidiActivity" />
-        <activity android:name=".navigation.MainMenuActivity" >
+        <activity
+            android:name=".midiGeneration.ChooseModelActivity"
+            android:label="@string/title_activity_choose_model"></activity>
+        <activity android:name=".utilities.SoundActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".utilities.TestingActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".markSightReading.TestSightReadingActivity" />
+        <activity android:name=".midiGeneration.GenerateMidiActivity" />
+        <activity android:name=".navigation.MainMenuActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".navigation.StartActivity"
-            android:theme="@style/SplashTheme">
-
-        </activity>
+            android:theme="@style/SplashTheme" />
         <activity android:name=".navigation.ChooseSongActivity" />
-        <activity android:name=".player.FileBrowserActivity" />
+        <activity android:name=".player.FileBrowserActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".player.AllSongsActivity" />
         <activity android:name=".player.RecentSongsActivity" />
         <activity
@@ -32,6 +54,7 @@
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.SETTINGS" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

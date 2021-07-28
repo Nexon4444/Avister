@@ -1,0 +1,2 @@
+data loc: /storage/emulated/0/Android/data/com.avister/files/Music
+log loc: /data/user_de/0/androidx.test.orchestrator/files

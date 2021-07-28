@@ -2,27 +2,34 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
-apply plugin: 'kotlin-android-extensions'
 
 repositories {
-    maven {
-        url 'https://github.com/joytunes/USB-MIDI-Driver/raw/master/MIDIDriver/snapshots'
-    }
-
+    maven { url 'https://github.com/joytunes/USB-MIDI-Driver/raw/master/MIDIDriver/snapshots' }
+//    maven { url 'https://github.com/kshoji/javax.sound.midi-for-Android/raw/master/javax.sound.midi/repository' }
+    maven { url 'https://github.com/kshoji/JFugue-for-Android/raw/master/jfugue-android/snapshot' }
+    maven { url 'https://github.com/kshoji/BLE-MIDI-for-Android/raw/master/library/repository' }
+    maven { url 'https://github.com/kshoji/USB-MIDI-Driver/raw/master/library/repository' }
     maven { url "https://kotlin.bintray.com/kotlin-datascience" }
-    mavenCentral()
+    maven { url 'https://jitpack.io' }
+
+
 }
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "30.0.3"
+    compileSdkVersion 30
+    buildToolsVersion '30.0.2'
     aaptOptions {
         noCompress "tflite"
     }
+
+    buildFeatures {
+        viewBinding true
+    }
+
     defaultConfig {
         applicationId 'com.avister'
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion 24
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -32,7 +39,6 @@ android {
         // that the app's state is completely cleared between tests.
 
         testInstrumentationRunnerArguments clearPackageData: 'true'
-
     }
 
 
@@ -57,6 +63,9 @@ android {
     }
 
     useLibrary 'android.test.mock'
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/NOTICE'
@@ -69,24 +78,41 @@ android {
 }
 
 dependencies {
+//    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:gradle-wrapper.properties:$kotlin_version"
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'jp.kshoji:midi-driver:0.1.5:@aar'
+    implementation 'jp.kshoji:ble-midi:0.0.9:@aar'
 //    implementation 'andwroidx.preference:preference:1.1.1'
-    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:design:30.0.0'
     implementation 'com.beust:klaxon:5.5'
     // For the navigation drawer
-    implementation "com.mikepenz:materialdrawer:7.0.0-rc01"
+    implementation "com.mikepenz:materialdrawer:7.0.0"
+//    implementation 'com.google.android.material:material:7.0.0-rc07'
     implementation "androidx.recyclerview:recyclerview:1.2.1"
     implementation "androidx.annotation:annotation:1.2.0"
-    implementation "com.google.android.material:material:1.3.0"
+    implementation "com.google.android.material:material:1.4.0"
     implementation "androidx.constraintlayout:constraintlayout:2.0.4"
-//    implementation 'org.jetbrains:kotlin-numpy:0.1.5'
+//    implementation 'org.jetbrains:kotlin-numpy:0.1.5 '
+//    implementation 'jp.kshoji:jfugue-android:5.0.1.201503:@aar'
+    implementation 'jp.kshoji:jfugue-android:5.0.1.201503:@aar'
 
     implementation 'androidx.preference:preference-ktx:1.1.1'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+    implementation 'androidx.navigation:navigation-ui:2.3.5'
+
 //    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.13.+"
+    // https://mvnrepository.com/artifact/jfugue/jfugue
+//    implementation 'com.github.JensPiegsa:jfugue:5.0.9'
+    implementation 'com.github.LeffelMania:android-midi-lib:f8f2a6645'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+
     testImplementation 'org.mockito:mockito-inline:2.8.47'
     testImplementation 'org.mockito:mockito-core:3.9.0'
 // https://mvnrepository.com/artifact/org.junit/junit5-engine
@@ -94,11 +120,11 @@ dependencies {
     testImplementation "org.mockito.kotlin:mockito-kotlin:3.2.0"
 
     androidTestImplementation 'org.mockito:mockito-android:3.7.7'
-    androidTestImplementation 'androidx.test:runner:1.3.0'
-    androidTestImplementation 'androidx.test:rules:1.3.0'
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation 'androidx.test:rules:1.4.0'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3-beta01'
-    testImplementation 'androidx.test.ext:junit:1.1.3-beta01'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    testImplementation 'androidx.test.ext:junit:1.1.3'
 
 //    androidTestUtil 'androidx.test:orchestrator:1.3.0'
 

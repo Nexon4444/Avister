@@ -120,7 +120,7 @@ class MnistClassifier(
     }
 }
 
-fun FloatArray.argMax(): Int {
-    return this.withIndex().maxBy { it.value }?.index
-        ?: throw IllegalArgumentException("Cannot find arg max in empty list")
-}
+//fun FloatArray.argMax(): Int {
+//    return this.withIndex().maxBy { it.value }?.index
+//        ?: throw IllegalArgumentException("Cannot find arg max in empty list")
+//}

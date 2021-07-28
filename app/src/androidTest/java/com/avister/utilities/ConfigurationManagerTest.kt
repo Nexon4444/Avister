@@ -15,10 +15,28 @@ internal class ConfigurationManagerTest {
     val activityTestRule = ActivityScenarioRule(MainMenuActivity::class.java)
 
     @Test
-    fun loadConfiguration() {
+    fun loadConfigurationTest() {
         activityTestRule.scenario.onActivity {
             val configurationManager = ConfigurationManager(it)
             assertEquals("Avister", configurationManager["app_name"])
+        }
+
+    }
+
+    @Test
+    fun MusicDirectoryTest() {
+        activityTestRule.scenario.onActivity {
+            val configurationManager = ConfigurationManager(it)
+            val musicDir = configurationManager["mainMusicDir"]
+            assert(musicDir != "")
+        }
+
+    }
+    @Test
+    fun ModelFileNameTest() {
+        activityTestRule.scenario.onActivity {
+            val configurationManager = ConfigurationManager(it)
+            assert(configurationManager["modelFileName"] != "")
         }
 
     }
