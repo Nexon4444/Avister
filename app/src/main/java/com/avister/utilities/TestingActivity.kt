@@ -13,6 +13,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.avister.R
 import com.avister.midiGeneration.saveAsMidi
+import com.avister.ml.models.ModelType
+import com.avister.ml.models.MusicGenerator
+import com.avister.ml.models.MusicGeneratorAndroid
 import org.jfugue.pattern.Pattern
 import java.io.File
 import java.io.FileOutputStream
@@ -27,8 +30,18 @@ class TestingActivity : AppCompatActivity() {
 //        val outFile = File(outUri)
 //        val isCreated = outFile.createNewFile()
 //        val x = "s"
-        patternSaveAsMidiWithChordsTest()
+//        patternSaveAsMidiWithChordsTest()
+
+        val configurationManager = ConfigurationManager(this)
+        val musicGeneratorAndroid =
+            MusicGeneratorAndroid(this, configurationManager["modelFileName"], ModelType.CPC)
+
+        val sead = MusicGenerator.generateRandomArray(listOf(100)) as FloatArray
+//        musicGeneratorAndroid.generateMidiPattern(24, sead)
+        val pattern: Pattern = musicGeneratorAndroid.generateMidiPattern(24, sead)
+        val file = pattern.saveAsMidi(this, filesDir, "sheet_" + currentDateTimeAsString() + ".mid")
     }
+
     fun patternSaveAsMidiWithChordsTest() {
 //        testOnActivity {
             val noteString =

@@ -53,6 +53,10 @@
     <string name="play_available_midi_files">Play available midi_files</string>
     <string name="generate_midi_files">Generate midi files</string>
     <string name="test_sight_reading_skill">Test sight reading skill</string>
+    <string name="title_activity_choose_model">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 
 </resources>
