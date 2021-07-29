@@ -178,7 +178,8 @@ class AllSongsActivity : ListActivity(), TextWatcher {
             loadAssetMidiFiles()
             val conf = ConfigurationManager(this)
             val cw = ContextWrapper(applicationContext)
-            val mainMusicDir = cw.getExternalFilesDir(conf["mainMusicDir"])?.toUri()?.getPath()
+            val mainMusicDir = cw.getExternalFilesDir(conf["mainMusicDir"][0]
+            )?.toUri()?.getPath()
 //            loadMidiFilesFromProvider(Uri.parse(mainMusicDir))
             loadMidiFilesFromProvider(File("$filesDir"))
 //            loadMidiFilesFromProvider(MediaStore.Audio.Media.INTERNAL_CONTENT_URI)
@@ -296,39 +297,6 @@ class AllSongsActivity : ListActivity(), TextWatcher {
         } catch (e: IOException) {
         }
     }
-
-    /** Look for midi files (with mime-type audio/midi) in the
-     * internal/external storage. Add them to the songlist.
-     */
-
-//    private fun loadMidiFilesFromProvider(content_uri: Uri) {
-//        val resolver = contentResolver
-//        val columns = arrayOf(
-//            MediaStore.Audio.Media._ID,
-//            MediaStore.Audio.Media.TITLE,
-//            MediaStore.Audio.Media.MIME_TYPE
-//        )
-//        val selection = MediaStore.Audio.Media.MIME_TYPE + " LIKE '%mid%'"
-//        val cursor = resolver.query(content_uri, columns, selection, null, null) ?: return
-//        if (!cursor.moveToFirst()) {
-//            cursor.close()
-//            return
-//        }
-//        do {
-//            val idColumn = cursor.getColumnIndex(MediaStore.Audio.Media._ID)
-//            val titleColumn = cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)
-//            val mimeColumn = cursor.getColumnIndex(MediaStore.Audio.Media.MIME_TYPE)
-//            val id = cursor.getLong(idColumn)
-//            val title = cursor.getString(titleColumn)
-//            val mime = cursor.getString(mimeColumn)
-//            if (mime.endsWith("/midi") || mime.endsWith("/mid")) {
-//                val uri = Uri.withAppendedPath(content_uri, "" + id)
-//                val file = Uri(uri, title)
-//                songlist!!.add(file)
-//            }
-//        } while (cursor.moveToNext())
-//        cursor.close()
-//    }
 
 
 

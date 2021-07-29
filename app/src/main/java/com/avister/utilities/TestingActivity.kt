@@ -34,7 +34,7 @@ class TestingActivity : AppCompatActivity() {
 
         val configurationManager = ConfigurationManager(this)
         val musicGeneratorAndroid =
-            MusicGeneratorAndroid(this, configurationManager["modelFileName"], ModelType.CPC)
+            MusicGeneratorAndroid(this, configurationManager["modelFileName"] as String, ModelType.CPC)
 
         val sead = MusicGenerator.generateRandomArray(listOf(100)) as FloatArray
 //        musicGeneratorAndroid.generateMidiPattern(24, sead)

@@ -37,12 +37,12 @@ class MusicGeneratorAndroid(
         modelType
     ) {
     val configurationManager: ConfigurationManager = ConfigurationManager(context)
-    override val numThreads: Int = Integer.parseInt(configurationManager["numThreads"])
-    val modelFileName: String = configurationManager["modelFileName"]
+    override val numThreads: Int = Integer.parseInt(configurationManager["numThreads"] as String)
+    val modelFileName: String = configurationManager["modelFileName"] as String
     val notesArray: List<String>
 
     init {
-        val notesString = context.assets.open(configurationManager["notes"]).bufferedReader()
+        val notesString = context.assets.open(configurationManager["notes"] as String).bufferedReader()
             .use { it.readText() }
         notesArray = Klaxon().parseArray(notesString)!!
     }
@@ -157,7 +157,7 @@ class MusicGeneratorAndroid(
         fun createNotesArrayFromContext(context: Context): List<String> {
             val configurationManager = ConfigurationManager(context)
             val notesString: String =
-                context.assets.open(configurationManager["notes"]).bufferedReader()
+                context.assets.open(configurationManager["notes"] as String).bufferedReader()
                     .use { it.readText() }
             val notesArray: List<String> = Klaxon().parseArray(notesString)
                 ?: throw IllegalArgumentException("notesString can't be null!")
@@ -170,7 +170,7 @@ class MusicGeneratorAndroid(
 
         fun getConfigurationManager(context: Context, key: String): String {
             val configurationManager = ConfigurationManager(context)
-            return configurationManager[key]
+            return configurationManager[key] as String
         }
 
 
