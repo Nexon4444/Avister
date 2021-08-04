@@ -3,6 +3,7 @@ package com.avister.midiGeneration
 //import org.jfugue.midi.MidiFileManager
 //import org.jfugue.pattern.Pattern
 
+import android.app.Activity
 import android.content.ContextWrapper
 import android.os.Bundle
 import android.os.Environment
@@ -24,14 +25,14 @@ import org.jfugue.pattern.Pattern
 import java.io.File
 
 
-class GenerateMidiActivity : AppCompatActivity() {
+class GenerateMidiActivity : Activity() {
     val tempo = 120
     val repeat = 1
-    fun setLayout(mainLayout: Int, secondaryLayout: Int): ViewGroup {
-        val placeHolder = findViewById<Layout>(mainLayout)
-        layoutInflater.inflate(secondaryLayout, placeHolder)
-        return placeHolder
-    }
+//    fun setLayout(mainLayout: Int, secondaryLayout: Int): ViewGroup {
+//        val placeHolder = findViewById<Layout>(mainLayout)
+//        layoutInflater.inflate(secondaryLayout, placeHolder)
+//        return placeHolder
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +65,10 @@ class GenerateMidiActivity : AppCompatActivity() {
                 id: Long
             ) {
 
-                setLayout(R.layout.activity_generate_midi, contentViews[position])
+                when(position) {
+                    0 -> print("0")
+                }
+//                setLayout(R.layout.activity_generate_midi, contentViews[position])
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -72,7 +76,6 @@ class GenerateMidiActivity : AppCompatActivity() {
             }
 
         }
-//        spinner.setOnItemClickListener { , view, position, id ->  }
     }
 
     fun generateAndSavePattern(): Pair<Pattern, File> {
