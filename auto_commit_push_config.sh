@@ -1,27 +1,30 @@
 #!/bin/sh
 cd .
-
+set -x
 timestamp() {
   date +"at %H:%M:%S on %d/%m/%Y"
 }
-temp=$(echo git branch --show-current)
+temp=$(git branch --show-current)
 echo $temp
 #eval x=($temp == "backup")
 #echo $x
 
-if [$temp == "backup"]
+if [[ "$temp" = "backup" ]]
 then
   echo "error"
   exit -1
 fi
-echo "mowsi"
-git show-ref --verify --quiet refs/heads/backup
 
+git show-ref --verify --quiet refs/heads/backup
 if [$? == 0]
 then
   printf "NOT EXISTS\n"
   git stash
+  git stash branch backup
   git checkout backup
+  git commit -am "Regular auto-commit $(timestamp)"
+  git push --set-upstream origin backup
+  git checkout $temp
   git stash pop
 
 else
@@ -31,7 +34,7 @@ else
 
   git commit -am "Regular auto-commit $(timestamp)"
   git checkout backup
-  git merge temp-backup-branch
+  git merge -X theirs temp-backup-branch
   git branch -D temp-backup-branch
   git push --set-upstream origin backup
 
