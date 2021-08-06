@@ -1,0 +1,560 @@
+Index: .idea/runConfigurations.xml
+===================================================================
+diff --git a/.idea/runConfigurations.xml b/.idea/runConfigurations.xml
+deleted file mode 100644
+--- a/.idea/runConfigurations.xml	(revision 3da8227519b510f1db6934551fb863d9417882cb)
++++ /dev/null	(revision 3da8227519b510f1db6934551fb863d9417882cb)
+@@ -1,12 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="RunConfigurationProducerService">
+-    <option name="ignoredProducers">
+-      <set>
+-        <option value="org.jetbrains.plugins.gradle.execution.test.runner.AllInPackageGradleConfigurationProducer" />
+-        <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestClassGradleConfigurationProducer" />
+-        <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestMethodGradleConfigurationProducer" />
+-      </set>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_8\" project-jdk-name=\"1.8 (4)\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 3da8227519b510f1db6934551fb863d9417882cb)
++++ b/.idea/misc.xml	(date 1619775102000)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8 (4)" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="16" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\r\n        <option name=\"testRunner\" value=\"PLATFORM\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision 3da8227519b510f1db6934551fb863d9417882cb)
++++ b/.idea/gradle.xml	(date 1628077090993)
+@@ -1,8 +1,10 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="GradleMigrationSettings" migrationVersion="1" />
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
++        <option name="testRunner" value="GRADLE" />
+         <option name="distributionType" value="DEFAULT_WRAPPED" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+         <option name="modules">
+@@ -12,7 +14,6 @@
+           </set>
+         </option>
+         <option name="resolveModulePerSourceSet" value="false" />
+-        <option name="testRunner" value="PLATFORM" />
+       </GradleProjectSettings>
+     </option>
+   </component>
+Index: app/src/test/java/com/ml/models/MnistClassifierTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/ml/models/MnistClassifierTest.kt b/app/src/test/java/com/ml/models/MnistClassifierTest.kt
+new file mode 100644
+--- /dev/null	(date 1620920483000)
++++ b/app/src/test/java/com/ml/models/MnistClassifierTest.kt	(date 1620920483000)
+@@ -0,0 +1,21 @@
++package com.ml.models
++
++import android.app.Activity
++import android.net.Uri
++import org.junit.jupiter.api.Assertions.*
++import org.junit.jupiter.api.Test
++import shouldNotThrow
++
++internal class MnistClassifierTest{
++    @Test
++    fun testModelConstructors(){
++        val activity = Activity()
++        val configurationFile = "app/src/main/configurations/configurationMnist.json"
++        {
++            val mnistClassifier = MnistClassifier(activity, configurationFile)
++        }.shouldNotThrow()
++
++    }
++
++
++}
+\ No newline at end of file
+Index: .idea/jarRepositories.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/jarRepositories.xml b/.idea/jarRepositories.xml
+new file mode 100644
+--- /dev/null	(date 1619772870000)
++++ b/.idea/jarRepositories.xml	(date 1619772870000)
+@@ -0,0 +1,35 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="RemoteRepositoriesConfiguration">
++    <remote-repository>
++      <option name="id" value="central" />
++      <option name="name" value="Maven Central repository" />
++      <option name="url" value="https://repo1.maven.org/maven2" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="jboss.community" />
++      <option name="name" value="JBoss Community repository" />
++      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="BintrayJCenter" />
++      <option name="name" value="BintrayJCenter" />
++      <option name="url" value="https://jcenter.bintray.com/" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="Google" />
++      <option name="name" value="Google" />
++      <option name="url" value="https://dl.google.com/dl/android/maven2/" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="MavenRepo" />
++      <option name="name" value="MavenRepo" />
++      <option name="url" value="https://repo.maven.apache.org/maven2/" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="maven" />
++      <option name="name" value="maven" />
++      <option name="url" value="https://github.com/joytunes/USB-MIDI-Driver/raw/master/MIDIDriver/snapshots" />
++    </remote-repository>
++  </component>
++</project>
+\ No newline at end of file
+Index: app/src/main/java/com/ml/models/ClassifierActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/ml/models/ClassifierActivity.java b/app/src/main/java/com/ml/models/ClassifierActivity.java
+new file mode 100644
+--- /dev/null	(date 1620912047000)
++++ b/app/src/main/java/com/ml/models/ClassifierActivity.java	(date 1620912047000)
+@@ -0,0 +1,163 @@
++/*
++ * Copyright 2019 The TensorFlow Authors. All Rights Reserved.
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *       http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++package com.ml.models;
++
++import android.graphics.Bitmap;
++import android.graphics.Bitmap.Config;
++import android.graphics.Typeface;
++import android.media.ImageReader.OnImageAvailableListener;
++import android.os.SystemClock;
++import android.util.Size;
++import android.util.TypedValue;
++import android.widget.Toast;
++
++import org.tensorflow.lite.examples.classification.env.BorderedText;
++import org.tensorflow.lite.examples.classification.env.Logger;
++import org.tensorflow.lite.examples.classification.tflite.Classifier;
++import org.tensorflow.lite.examples.classification.tflite.Classifier.Device;
++import org.tensorflow.lite.examples.classification.tflite.Classifier.Model;
++
++import java.io.IOException;
++import java.util.List;
++
++public class ClassifierActivity extends CameraActivity implements OnImageAvailableListener {
++  private static final Logger LOGGER = new Logger();
++  private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
++  private static final float TEXT_SIZE_DIP = 10;
++  private Bitmap rgbFrameBitmap = null;
++  private long lastProcessingTimeMs;
++  private Integer sensorOrientation;
++  private Classifier classifier;
++  private BorderedText borderedText;
++  /** Input image size of the model along x axis. */
++  private int imageSizeX;
++  /** Input image size of the model along y axis. */
++  private int imageSizeY;
++
++  @Override
++  protected int getLayoutId() {
++    return R.layout.tfe_ic_camera_connection_fragment;
++  }
++
++  @Override
++  protected Size getDesiredPreviewFrameSize() {
++    return DESIRED_PREVIEW_SIZE;
++  }
++
++  @Override
++  public void onPreviewSizeChosen(final Size size, final int rotation) {
++    final float textSizePx =
++        TypedValue.applyDimension(
++            TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
++    borderedText = new BorderedText(textSizePx);
++    borderedText.setTypeface(Typeface.MONOSPACE);
++
++    recreateClassifier(getModel(), getDevice(), getNumThreads());
++    if (classifier == null) {
++      LOGGER.e("No classifier on preview!");
++      return;
++    }
++
++    previewWidth = size.getWidth();
++    previewHeight = size.getHeight();
++
++    sensorOrientation = rotation - getScreenOrientation();
++    LOGGER.i("Camera orientation relative to screen canvas: %d", sensorOrientation);
++
++    LOGGER.i("Initializing at size %dx%d", previewWidth, previewHeight);
++    rgbFrameBitmap = Bitmap.createBitmap(previewWidth, previewHeight, Config.ARGB_8888);
++  }
++
++  @Override
++  protected void processImage() {
++    rgbFrameBitmap.setPixels(getRgbBytes(), 0, previewWidth, 0, 0, previewWidth, previewHeight);
++    final int cropSize = Math.min(previewWidth, previewHeight);
++
++    runInBackground(
++        new Runnable() {
++          @Override
++          public void run() {
++            if (classifier != null) {
++              final long startTime = SystemClock.uptimeMillis();
++              final List<Classifier.Recognition> results =
++                  classifier.recognizeImage(rgbFrameBitmap, sensorOrientation);
++              lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
++              LOGGER.v("Detect: %s", results);
++
++              runOnUiThread(
++                  new Runnable() {
++                    @Override
++                    public void run() {
++                      showResultsInBottomSheet(results);
++                      showFrameInfo(previewWidth + "x" + previewHeight);
++                      showCropInfo(imageSizeX + "x" + imageSizeY);
++                      showCameraResolution(cropSize + "x" + cropSize);
++                      showRotationInfo(String.valueOf(sensorOrientation));
++                      showInference(lastProcessingTimeMs + "ms");
++                    }
++                  });
++            }
++            readyForNextImage();
++          }
++        });
++  }
++
++  @Override
++  protected void onInferenceConfigurationChanged() {
++    if (rgbFrameBitmap == null) {
++      // Defer creation until we're getting camera frames.
++      return;
++    }
++    final Device device = getDevice();
++    final Model model = getModel();
++    final int numThreads = getNumThreads();
++    runInBackground(() -> recreateClassifier(model, device, numThreads));
++  }
++
++  private void recreateClassifier(Model model, Device device, int numThreads) {
++    if (classifier != null) {
++      LOGGER.d("Closing classifier.");
++      classifier.close();
++      classifier = null;
++    }
++    if (device == Device.GPU
++        && (model == Model.QUANTIZED_MOBILENET || model == Model.QUANTIZED_EFFICIENTNET)) {
++      LOGGER.d("Not creating classifier: GPU doesn't support quantized models.");
++      runOnUiThread(
++          () -> {
++            Toast.makeText(this, R.string.tfe_ic_gpu_quant_error, Toast.LENGTH_LONG).show();
++          });
++      return;
++    }
++    try {
++      LOGGER.d(
++          "Creating classifier (model=%s, device=%s, numThreads=%d)", model, device, numThreads);
++      classifier = Classifier.create(this, model, device, numThreads);
++    } catch (IOException | IllegalArgumentException e) {
++      LOGGER.e(e, "Failed to create classifier.");
++      runOnUiThread(
++          () -> {
++            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
++          });
++      return;
++    }
++
++    // Updates the input image size.
++    imageSizeX = classifier.getImageSizeX();
++    imageSizeY = classifier.getImageSizeY();
++  }
++}
+Index: app/src/main/java/com/ml/models/MnistModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/ml/models/MnistModel.kt b/app/src/main/java/com/ml/models/MnistModel.kt
+new file mode 100644
+--- /dev/null	(date 1620919782000)
++++ b/app/src/main/java/com/ml/models/MnistModel.kt	(date 1620919782000)
+@@ -0,0 +1,25 @@
++package com.ml.models
++
++import android.app.Activity
++import android.net.Uri
++import org.json.JSONObject
++import org.tensorflow.lite.support.model.Model
++import org.tensorflow.lite.task.vision.classifier.ImageClassifier
++import org.tensorflow.lite.task.vision.classifier.ImageClassifier.ImageClassifierOptions
++
++class MnistClassifier(activity: Activity, configurationFilePath: String)
++{
++//    modelPath: Uri
++    init {
++        val configuration = JSONObject(configurationFilePath.toString())
++        val numThreads: Int = configuration["numThreads"] as Int
++        val modelPath: String = configuration["modelPath"] as String
++        // Create the ImageClassifier instance.
++        val options = ImageClassifierOptions.builder()
++            .setMaxResults(1)
++            .setNumThreads(numThreads)
++            .build()
++
++        val imageClassifier = ImageClassifier.createFromFileAndOptions(activity, modelPath.toString(), options)
++    }
++}
+\ No newline at end of file
+Index: gradle/wrapper/gradle-wrapper.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Sun Apr 25 16:21:49 CEST 2021\r\ndistributionBase=GRADLE_USER_HOME\r\ndistributionPath=wrapper/dists\r\nzipStoreBase=GRADLE_USER_HOME\r\nzipStorePath=wrapper/dists\r\ndistributionUrl=https\\://services.gradle.org/distributions/gradle-5.4.1-all.zip\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1250
+===================================================================
+diff --git a/gradle/wrapper/gradle-wrapper.properties b/gradle/wrapper/gradle-wrapper.properties
+--- a/gradle/wrapper/gradle-wrapper.properties	(revision 3da8227519b510f1db6934551fb863d9417882cb)
++++ b/gradle/wrapper/gradle-wrapper.properties	(date 1619775753000)
+@@ -1,6 +1,6 @@
+-#Sun Apr 25 16:21:49 CEST 2021
++#Fri Apr 30 11:42:33 CEST 2021
+ distributionBase=GRADLE_USER_HOME
+ distributionPath=wrapper/dists
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-5.4.1-all.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-6.5-all.zip
+Index: app/configurations/configurationMnist.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/configurations/configurationMnist.json b/app/configurations/configurationMnist.json
+new file mode 100644
+--- /dev/null	(date 1620918131000)
++++ b/app/configurations/configurationMnist.json	(date 1620918131000)
+@@ -0,0 +1,5 @@
++{
++  "name": "Mnist Model",
++  "numThreads": 3,
++  "modelPath": "app/main/ml/model.tflite"
++}
+\ No newline at end of file
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>apply plugin: 'com.android.application'\r\n\r\napply plugin: 'kotlin-android'\r\n\r\napply plugin: 'kotlin-android-extensions'\r\n\r\nrepositories {\r\n    maven {\r\n        url 'https://github.com/joytunes/USB-MIDI-Driver/raw/master/MIDIDriver/snapshots'\r\n    }\r\n    mavenCentral()\r\n}\r\n\r\nandroid {\r\n    compileSdkVersion 28\r\n    buildToolsVersion \"30.0.3\"\r\n    defaultConfig {\r\n        applicationId 'com.avister'\r\n        minSdkVersion 21\r\n        targetSdkVersion 28\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility = '1.8'\r\n        targetCompatibility = '1.8'\r\n    }\r\n\r\n    packagingOptions {\r\n        exclude 'META-INF/library-core_release.kotlin_module'\r\n    }\r\n\r\n}\r\n\r\ndependencies {\r\n    implementation fileTree(dir: 'libs', include: ['*.jar'])\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n    implementation 'androidx.appcompat:appcompat:1.0.2'\r\n    implementation 'jp.kshoji:midi-driver:0.1.5:@aar'\r\n    implementation 'androidx.preference:preference:1.1.0-rc01'\r\n    implementation 'com.android.support:design:28.0.0'\r\n\r\n    // For the navigation drawer\r\n    implementation \"com.mikepenz:materialdrawer:7.0.0-rc01\"\r\n    implementation \"androidx.recyclerview:recyclerview:1.0.0\"\r\n    implementation \"androidx.annotation:annotation:1.1.0\"\r\n    implementation \"com.google.android.material:material:1.0.0\"\r\n    implementation \"androidx.constraintlayout:constraintlayout:1.1.3\"\r\n\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n    implementation 'androidx.preference:preference:1.1.0-rc01'\r\n//    implementation 'com.android.support:design:28.0.0'\r\n\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	(revision 3da8227519b510f1db6934551fb863d9417882cb)
++++ b/app/build.gradle	(date 1620918651000)
+@@ -10,10 +10,26 @@
+     }
+     mavenCentral()
+ }
++sourceSets {
++    main {
++        java.srcDirs = ['src/main/java']
++    }
++}
+ 
++spotbugs {
++    toolVersion = "3.1.3"
++    ignoreFailures = true
++    reportsDir = file("$project.buildDir/findbugsReports")
++    effort = "max"
++    reportLevel = "high"
++}
++tasks.withType(com.github.spotbugs.SpotBugsTask) {
++    classes = files("$projectDir.absolutePath/build/intermediates/classes/debug")
++    source = fileTree('src/main/java')
++}
+ android {
+     compileSdkVersion 28
+-    buildToolsVersion "30.0.3"
++    buildToolsVersion "29.0.2"
+     defaultConfig {
+         applicationId 'com.avister'
+         minSdkVersion 21
+@@ -36,6 +52,9 @@
+     packagingOptions {
+         exclude 'META-INF/library-core_release.kotlin_module'
+     }
++    buildFeatures {
++        mlModelBinding true
++    }
+ 
+ }
+ 
+@@ -56,7 +75,30 @@
+ 
+     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+     implementation 'androidx.preference:preference:1.1.0-rc01'
++    implementation 'org.tensorflow:tensorflow-lite-support:0.1.0-rc1'
++    implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0-rc1'
++    implementation 'org.tensorflow:tensorflow-lite-gpu:2.2.0'
++    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.1.0'
++    implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0'
++    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.2'
++    //TODO remove firebase dependencies
++    //==============================================================================================
++    // Import the BoM for the Firebase platform
++    implementation platform('com.google.firebase:firebase-bom:27.1.0')
++
++    // Declare the dependency for the Firebase ML model downloader library
++    // When using the BoM, you don't specify versions in Firebase library dependencies
++    implementation 'com.google.firebase:firebase-ml-modeldownloader-ktx'
++
++    // Also declare the dependency for the TensorFlow Lite library and specify its version
++    implementation 'org.tensorflow:tensorflow-lite:2.3.0'
++
+ //    implementation 'com.android.support:design:28.0.0'
++    //==============================================================================================
+ 
+ }
+ 
++//test {
++//    useJUnitPlatform()
++//}
++
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Top-level build file where you can add configuration options common to all sub-projects/modules.\r\n\r\nbuildscript {\r\n    ext.kotlin_version = '1.3.50'\r\n    repositories {\r\n        google()\r\n        jcenter()\r\n        \r\n    }\r\n    dependencies {\r\n        classpath 'com.android.tools.build:gradle:3.5.2'\r\n        classpath \"org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version\"\r\n        // NOTE: Do not place your application dependencies here; they belong\r\n        // in the individual module build.gradle files\r\n    }\r\n}\r\n\r\nallprojects {\r\n    repositories {\r\n        google()\r\n        jcenter()\r\n        \r\n    }\r\n}\r\ndependencies {\r\n    apply plugin: 'findbugs'\r\n\r\n}\r\ntask clean(type: Delete) {\r\n    delete rootProject.buildDir\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build.gradle b/build.gradle
+--- a/build.gradle	(revision 3da8227519b510f1db6934551fb863d9417882cb)
++++ b/build.gradle	(date 1619775991000)
+@@ -5,11 +5,14 @@
+     repositories {
+         google()
+         jcenter()
+-        
++        maven {
++            url "https://plugins.gradle.org/m2/"
++        }
+     }
+     dependencies {
+-        classpath 'com.android.tools.build:gradle:3.5.2'
++        classpath 'com.android.tools.build:gradle:4.1.3'
+         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
++        classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:1.6.4"
+         // NOTE: Do not place your application dependencies here; they belong
+         // in the individual module build.gradle files
+     }
+@@ -23,7 +26,7 @@
+     }
+ }
+ dependencies {
+-    apply plugin: 'findbugs'
++    apply plugin: "com.github.spotbugs"
+ 
+ }
+ task clean(type: Delete) {
+Index: gradle.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># Project-wide Gradle settings.\r\n# IDE (e.g. Android Studio) users:\r\n# Gradle settings configured through the IDE *will override*\r\n# any settings specified in this file.\r\n# For more details on how to configure your build environment visit\r\n# http://www.gradle.org/docs/current/userguide/build_environment.html\r\n# Specifies the JVM arguments used for the daemon process.\r\n# The setting is particularly useful for tweaking memory settings.\r\norg.gradle.jvmargs=-Xmx1536m\r\n# When configured, Gradle will run in incubating parallel mode.\r\n# This option should only be used with decoupled projects. More details, visit\r\n# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects\r\n# org.gradle.parallel=true\r\n# AndroidX package structure to make it clearer which packages are bundled with the\r\n# Android operating system, and which are packaged with your app's APK\r\n# https://developer.android.com/topic/libraries/support-library/androidx-rn\r\nandroid.useAndroidX=true\r\n# Automatically convert third-party libraries to use AndroidX\r\nandroid.enableJetifier=true\r\n# Kotlin code style for this project: \"official\" or \"obsolete\":\r\nkotlin.code.style=official\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1250
+===================================================================
+diff --git a/gradle.properties b/gradle.properties
+--- a/gradle.properties	(revision 3da8227519b510f1db6934551fb863d9417882cb)
++++ b/gradle.properties	(date 1619783354000)
+@@ -6,7 +6,7 @@
+ # http://www.gradle.org/docs/current/userguide/build_environment.html
+ # Specifies the JVM arguments used for the daemon process.
+ # The setting is particularly useful for tweaking memory settings.
+-org.gradle.jvmargs=-Xmx1536m
++org.gradle.jvmargs=-Xmx4608m
+ # When configured, Gradle will run in incubating parallel mode.
+ # This option should only be used with decoupled projects. More details, visit
+ # http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects
+@@ -18,4 +18,4 @@
+ # Automatically convert third-party libraries to use AndroidX
+ android.enableJetifier=true
+ # Kotlin code style for this project: "official" or "obsolete":
+-kotlin.code.style=official
++kotlin.code.style=official
+\ No newline at end of file
+Index: app/src/test/java/testUtilities.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/testUtilities.kt b/app/src/test/java/testUtilities.kt
+new file mode 100644
+--- /dev/null	(date 1620920101000)
++++ b/app/src/test/java/testUtilities.kt	(date 1620920101000)
+@@ -0,0 +1,2 @@
++fun (() -> Any?).shouldNotThrow()
++        = try { invoke() } catch (ex : Exception){ throw Error("expected not to throw!", ex) }
+\ No newline at end of file
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+new file mode 100644
+--- /dev/null	(date 1619772755000)
++++ b/.idea/compiler.xml	(date 1619772755000)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CompilerConfiguration">
++    <bytecodeTargetLevel target="1.8" />
++  </component>
++</project>
+\ No newline at end of file

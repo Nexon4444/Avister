@@ -1,0 +1,65 @@
+Index: .idea/jarRepositories.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"RemoteRepositoriesConfiguration\">\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"central\" />\r\n      <option name=\"name\" value=\"Maven Central repository\" />\r\n      <option name=\"url\" value=\"https://repo1.maven.org/maven2\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"jboss.community\" />\r\n      <option name=\"name\" value=\"JBoss Community repository\" />\r\n      <option name=\"url\" value=\"https://repository.jboss.org/nexus/content/repositories/public/\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"BintrayJCenter\" />\r\n      <option name=\"name\" value=\"BintrayJCenter\" />\r\n      <option name=\"url\" value=\"https://jcenter.bintray.com/\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"Google\" />\r\n      <option name=\"name\" value=\"Google\" />\r\n      <option name=\"url\" value=\"https://dl.google.com/dl/android/maven2/\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"MavenRepo\" />\r\n      <option name=\"name\" value=\"MavenRepo\" />\r\n      <option name=\"url\" value=\"https://repo.maven.apache.org/maven2/\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"maven\" />\r\n      <option name=\"name\" value=\"maven\" />\r\n      <option name=\"url\" value=\"https://github.com/joytunes/USB-MIDI-Driver/raw/master/MIDIDriver/snapshots\" />\r\n    </remote-repository>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/jarRepositories.xml b/.idea/jarRepositories.xml
+--- a/.idea/jarRepositories.xml	(revision c10d0c2cfa4be0c275309e20e16ec61080adbc27)
++++ b/.idea/jarRepositories.xml	(date 1628080074315)
+@@ -31,5 +31,35 @@
+       <option name="name" value="maven" />
+       <option name="url" value="https://github.com/joytunes/USB-MIDI-Driver/raw/master/MIDIDriver/snapshots" />
+     </remote-repository>
++    <remote-repository>
++      <option name="id" value="maven2" />
++      <option name="name" value="maven2" />
++      <option name="url" value="https://maven.google.com" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="maven" />
++      <option name="name" value="maven" />
++      <option name="url" value="https://jitpack.io" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="maven7" />
++      <option name="name" value="maven7" />
++      <option name="url" value="https://kotlin.bintray.com/kotlin-datascience" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="maven4" />
++      <option name="name" value="maven4" />
++      <option name="url" value="https://github.com/kshoji/JFugue-for-Android/raw/master/jfugue-android/snapshot" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="maven5" />
++      <option name="name" value="maven5" />
++      <option name="url" value="https://github.com/kshoji/BLE-MIDI-for-Android/raw/master/library/repository" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="maven6" />
++      <option name="name" value="maven6" />
++      <option name="url" value="https://github.com/kshoji/USB-MIDI-Driver/raw/master/library/repository" />
++    </remote-repository>
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_8\" project-jdk-name=\"1.8 (4)\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision c10d0c2cfa4be0c275309e20e16ec61080adbc27)
++++ b/.idea/misc.xml	(date 1628079824174)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8 (4)" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8 (4)" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">

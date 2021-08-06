@@ -1,0 +1,403 @@
+Index: .idea/runConfigurations.xml
+===================================================================
+diff --git a/.idea/runConfigurations.xml b/.idea/runConfigurations.xml
+deleted file mode 100644
+--- a/.idea/runConfigurations.xml	(revision 58908a730262c0ff3cc3f4cbb793a653fcab11d1)
++++ /dev/null	(revision 58908a730262c0ff3cc3f4cbb793a653fcab11d1)
+@@ -1,13 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="RunConfigurationProducerService">
+-    <option name="ignoredProducers">
+-      <set>
+-        <option value="com.android.tools.idea.compose.preview.runconfiguration.ComposePreviewRunConfigurationProducer" />
+-        <option value="org.jetbrains.plugins.gradle.execution.test.runner.AllInPackageGradleConfigurationProducer" />
+-        <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestClassGradleConfigurationProducer" />
+-        <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestMethodGradleConfigurationProducer" />
+-      </set>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"false\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 58908a730262c0ff3cc3f4cbb793a653fcab11d1)
++++ b/.idea/misc.xml	(date 1628077188750)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8 (4)" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"PLATFORM\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision 58908a730262c0ff3cc3f4cbb793a653fcab11d1)
++++ b/.idea/gradle.xml	(date 1628077195062)
+@@ -1,10 +1,8 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="GradleMigrationSettings" migrationVersion="1" />
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+-        <option name="testRunner" value="PLATFORM" />
+         <option name="distributionType" value="DEFAULT_WRAPPED" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+         <option name="modules">
+@@ -14,6 +12,7 @@
+           </set>
+         </option>
+         <option name="resolveModulePerSourceSet" value="false" />
++        <option name="testRunner" value="PLATFORM" />
+       </GradleProjectSettings>
+     </option>
+   </component>
+Index: app/src/test/java/com/ml/models/MnistClassifierTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/ml/models/MnistClassifierTest.kt b/app/src/test/java/com/ml/models/MnistClassifierTest.kt
+new file mode 100644
+--- /dev/null	(date 1628077199773)
++++ b/app/src/test/java/com/ml/models/MnistClassifierTest.kt	(date 1628077199773)
+@@ -0,0 +1,21 @@
++package com.ml.models
++
++import android.app.Activity
++import android.net.Uri
++import org.junit.jupiter.api.Assertions.*
++import org.junit.jupiter.api.Test
++import shouldNotThrow
++
++internal class MnistClassifierTest{
++    @Test
++    fun testModelConstructors(){
++        val activity = Activity()
++        val configurationFile = "app/src/main/configurations/configurationMnist.json"
++        {
++            val mnistClassifier = MnistClassifier(activity, configurationFile)
++        }.shouldNotThrow()
++
++    }
++
++
++}
+\ No newline at end of file
+Index: app/src/main/java/com/ml/models/ClassifierActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/ml/models/ClassifierActivity.java b/app/src/main/java/com/ml/models/ClassifierActivity.java
+new file mode 100644
+--- /dev/null	(date 1628077199804)
++++ b/app/src/main/java/com/ml/models/ClassifierActivity.java	(date 1628077199804)
+@@ -0,0 +1,163 @@
++/*
++ * Copyright 2019 The TensorFlow Authors. All Rights Reserved.
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *       http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++package com.ml.models;
++
++import android.graphics.Bitmap;
++import android.graphics.Bitmap.Config;
++import android.graphics.Typeface;
++import android.media.ImageReader.OnImageAvailableListener;
++import android.os.SystemClock;
++import android.util.Size;
++import android.util.TypedValue;
++import android.widget.Toast;
++
++import org.tensorflow.lite.examples.classification.env.BorderedText;
++import org.tensorflow.lite.examples.classification.env.Logger;
++import org.tensorflow.lite.examples.classification.tflite.Classifier;
++import org.tensorflow.lite.examples.classification.tflite.Classifier.Device;
++import org.tensorflow.lite.examples.classification.tflite.Classifier.Model;
++
++import java.io.IOException;
++import java.util.List;
++
++public class ClassifierActivity extends CameraActivity implements OnImageAvailableListener {
++  private static final Logger LOGGER = new Logger();
++  private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
++  private static final float TEXT_SIZE_DIP = 10;
++  private Bitmap rgbFrameBitmap = null;
++  private long lastProcessingTimeMs;
++  private Integer sensorOrientation;
++  private Classifier classifier;
++  private BorderedText borderedText;
++  /** Input image size of the model along x axis. */
++  private int imageSizeX;
++  /** Input image size of the model along y axis. */
++  private int imageSizeY;
++
++  @Override
++  protected int getLayoutId() {
++    return R.layout.tfe_ic_camera_connection_fragment;
++  }
++
++  @Override
++  protected Size getDesiredPreviewFrameSize() {
++    return DESIRED_PREVIEW_SIZE;
++  }
++
++  @Override
++  public void onPreviewSizeChosen(final Size size, final int rotation) {
++    final float textSizePx =
++        TypedValue.applyDimension(
++            TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
++    borderedText = new BorderedText(textSizePx);
++    borderedText.setTypeface(Typeface.MONOSPACE);
++
++    recreateClassifier(getModel(), getDevice(), getNumThreads());
++    if (classifier == null) {
++      LOGGER.e("No classifier on preview!");
++      return;
++    }
++
++    previewWidth = size.getWidth();
++    previewHeight = size.getHeight();
++
++    sensorOrientation = rotation - getScreenOrientation();
++    LOGGER.i("Camera orientation relative to screen canvas: %d", sensorOrientation);
++
++    LOGGER.i("Initializing at size %dx%d", previewWidth, previewHeight);
++    rgbFrameBitmap = Bitmap.createBitmap(previewWidth, previewHeight, Config.ARGB_8888);
++  }
++
++  @Override
++  protected void processImage() {
++    rgbFrameBitmap.setPixels(getRgbBytes(), 0, previewWidth, 0, 0, previewWidth, previewHeight);
++    final int cropSize = Math.min(previewWidth, previewHeight);
++
++    runInBackground(
++        new Runnable() {
++          @Override
++          public void run() {
++            if (classifier != null) {
++              final long startTime = SystemClock.uptimeMillis();
++              final List<Classifier.Recognition> results =
++                  classifier.recognizeImage(rgbFrameBitmap, sensorOrientation);
++              lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
++              LOGGER.v("Detect: %s", results);
++
++              runOnUiThread(
++                  new Runnable() {
++                    @Override
++                    public void run() {
++                      showResultsInBottomSheet(results);
++                      showFrameInfo(previewWidth + "x" + previewHeight);
++                      showCropInfo(imageSizeX + "x" + imageSizeY);
++                      showCameraResolution(cropSize + "x" + cropSize);
++                      showRotationInfo(String.valueOf(sensorOrientation));
++                      showInference(lastProcessingTimeMs + "ms");
++                    }
++                  });
++            }
++            readyForNextImage();
++          }
++        });
++  }
++
++  @Override
++  protected void onInferenceConfigurationChanged() {
++    if (rgbFrameBitmap == null) {
++      // Defer creation until we're getting camera frames.
++      return;
++    }
++    final Device device = getDevice();
++    final Model model = getModel();
++    final int numThreads = getNumThreads();
++    runInBackground(() -> recreateClassifier(model, device, numThreads));
++  }
++
++  private void recreateClassifier(Model model, Device device, int numThreads) {
++    if (classifier != null) {
++      LOGGER.d("Closing classifier.");
++      classifier.close();
++      classifier = null;
++    }
++    if (device == Device.GPU
++        && (model == Model.QUANTIZED_MOBILENET || model == Model.QUANTIZED_EFFICIENTNET)) {
++      LOGGER.d("Not creating classifier: GPU doesn't support quantized models.");
++      runOnUiThread(
++          () -> {
++            Toast.makeText(this, R.string.tfe_ic_gpu_quant_error, Toast.LENGTH_LONG).show();
++          });
++      return;
++    }
++    try {
++      LOGGER.d(
++          "Creating classifier (model=%s, device=%s, numThreads=%d)", model, device, numThreads);
++      classifier = Classifier.create(this, model, device, numThreads);
++    } catch (IOException | IllegalArgumentException e) {
++      LOGGER.e(e, "Failed to create classifier.");
++      runOnUiThread(
++          () -> {
++            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
++          });
++      return;
++    }
++
++    // Updates the input image size.
++    imageSizeX = classifier.getImageSizeX();
++    imageSizeY = classifier.getImageSizeY();
++  }
++}
+Index: app/src/main/java/com/ml/models/MnistModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/ml/models/MnistModel.kt b/app/src/main/java/com/ml/models/MnistModel.kt
+new file mode 100644
+--- /dev/null	(date 1628077199804)
++++ b/app/src/main/java/com/ml/models/MnistModel.kt	(date 1628077199804)
+@@ -0,0 +1,25 @@
++package com.ml.models
++
++import android.app.Activity
++import android.net.Uri
++import org.json.JSONObject
++import org.tensorflow.lite.support.model.Model
++import org.tensorflow.lite.task.vision.classifier.ImageClassifier
++import org.tensorflow.lite.task.vision.classifier.ImageClassifier.ImageClassifierOptions
++
++class MnistClassifier(activity: Activity, configurationFilePath: String)
++{
++//    modelPath: Uri
++    init {
++        val configuration = JSONObject(configurationFilePath.toString())
++        val numThreads: Int = configuration["numThreads"] as Int
++        val modelPath: String = configuration["modelPath"] as String
++        // Create the ImageClassifier instance.
++        val options = ImageClassifierOptions.builder()
++            .setMaxResults(1)
++            .setNumThreads(numThreads)
++            .build()
++
++        val imageClassifier = ImageClassifier.createFromFileAndOptions(activity, modelPath.toString(), options)
++    }
++}
+\ No newline at end of file
+Index: .idea/jarRepositories.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"RemoteRepositoriesConfiguration\">\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"central\" />\r\n      <option name=\"name\" value=\"Maven Central repository\" />\r\n      <option name=\"url\" value=\"https://repo1.maven.org/maven2\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"jboss.community\" />\r\n      <option name=\"name\" value=\"JBoss Community repository\" />\r\n      <option name=\"url\" value=\"https://repository.jboss.org/nexus/content/repositories/public/\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"BintrayJCenter\" />\r\n      <option name=\"name\" value=\"BintrayJCenter\" />\r\n      <option name=\"url\" value=\"https://jcenter.bintray.com/\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"Google\" />\r\n      <option name=\"name\" value=\"Google\" />\r\n      <option name=\"url\" value=\"https://dl.google.com/dl/android/maven2/\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"MavenRepo\" />\r\n      <option name=\"name\" value=\"MavenRepo\" />\r\n      <option name=\"url\" value=\"https://repo.maven.apache.org/maven2/\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"maven\" />\r\n      <option name=\"name\" value=\"maven\" />\r\n      <option name=\"url\" value=\"https://github.com/joytunes/USB-MIDI-Driver/raw/master/MIDIDriver/snapshots\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"maven2\" />\r\n      <option name=\"name\" value=\"maven2\" />\r\n      <option name=\"url\" value=\"https://kotlin.bintray.com/kotlin-datascience\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"maven\" />\r\n      <option name=\"name\" value=\"maven\" />\r\n      <option name=\"url\" value=\"https://jitpack.io\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"maven4\" />\r\n      <option name=\"name\" value=\"maven4\" />\r\n      <option name=\"url\" value=\"https://github.com/kshoji/JFugue-for-Android/raw/master/jfugue-android/snapshot\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"maven3\" />\r\n      <option name=\"name\" value=\"maven3\" />\r\n      <option name=\"url\" value=\"https://github.com/kshoji/javax.sound.midi-for-Android/raw/master/javax.sound.midi/repository\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"maven4\" />\r\n      <option name=\"name\" value=\"maven4\" />\r\n      <option name=\"url\" value=\"https://github.com/kshoji/USB-MIDI-Driver/raw/master/MIDIDriver/snapshots\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"maven5\" />\r\n      <option name=\"name\" value=\"maven5\" />\r\n      <option name=\"url\" value=\"https://github.com/kshoji/USB-MIDI-Driver/raw/master/library/repository\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"maven4\" />\r\n      <option name=\"name\" value=\"maven4\" />\r\n      <option name=\"url\" value=\"https://github.com/kshoji/BLE-MIDI-for-Android/raw/master/library/repository\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"maven2\" />\r\n      <option name=\"name\" value=\"maven2\" />\r\n      <option name=\"url\" value=\"https://maven.google.com\" />\r\n    </remote-repository>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/jarRepositories.xml b/.idea/jarRepositories.xml
+--- a/.idea/jarRepositories.xml	(revision 58908a730262c0ff3cc3f4cbb793a653fcab11d1)
++++ b/.idea/jarRepositories.xml	(date 1628077199773)
+@@ -31,45 +31,5 @@
+       <option name="name" value="maven" />
+       <option name="url" value="https://github.com/joytunes/USB-MIDI-Driver/raw/master/MIDIDriver/snapshots" />
+     </remote-repository>
+-    <remote-repository>
+-      <option name="id" value="maven2" />
+-      <option name="name" value="maven2" />
+-      <option name="url" value="https://kotlin.bintray.com/kotlin-datascience" />
+-    </remote-repository>
+-    <remote-repository>
+-      <option name="id" value="maven" />
+-      <option name="name" value="maven" />
+-      <option name="url" value="https://jitpack.io" />
+-    </remote-repository>
+-    <remote-repository>
+-      <option name="id" value="maven4" />
+-      <option name="name" value="maven4" />
+-      <option name="url" value="https://github.com/kshoji/JFugue-for-Android/raw/master/jfugue-android/snapshot" />
+-    </remote-repository>
+-    <remote-repository>
+-      <option name="id" value="maven3" />
+-      <option name="name" value="maven3" />
+-      <option name="url" value="https://github.com/kshoji/javax.sound.midi-for-Android/raw/master/javax.sound.midi/repository" />
+-    </remote-repository>
+-    <remote-repository>
+-      <option name="id" value="maven4" />
+-      <option name="name" value="maven4" />
+-      <option name="url" value="https://github.com/kshoji/USB-MIDI-Driver/raw/master/MIDIDriver/snapshots" />
+-    </remote-repository>
+-    <remote-repository>
+-      <option name="id" value="maven5" />
+-      <option name="name" value="maven5" />
+-      <option name="url" value="https://github.com/kshoji/USB-MIDI-Driver/raw/master/library/repository" />
+-    </remote-repository>
+-    <remote-repository>
+-      <option name="id" value="maven4" />
+-      <option name="name" value="maven4" />
+-      <option name="url" value="https://github.com/kshoji/BLE-MIDI-for-Android/raw/master/library/repository" />
+-    </remote-repository>
+-    <remote-repository>
+-      <option name="id" value="maven2" />
+-      <option name="name" value="maven2" />
+-      <option name="url" value="https://maven.google.com" />
+-    </remote-repository>
+   </component>
+ </project>
+\ No newline at end of file
+Index: app/configurations/configurationMnist.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/configurations/configurationMnist.json b/app/configurations/configurationMnist.json
+new file mode 100644
+--- /dev/null	(date 1628077203502)
++++ b/app/configurations/configurationMnist.json	(date 1628077203502)
+@@ -0,0 +1,5 @@
++{
++  "name": "Mnist Model",
++  "numThreads": 3,
++  "modelPath": "app/main/ml/model.tflite"
++}
+\ No newline at end of file
+Index: gradle/wrapper/gradle-wrapper.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Tue Jul 06 16:39:31 CEST 2021\r\ndistributionBase=GRADLE_USER_HOME\r\ndistributionPath=wrapper/dists\r\nzipStoreBase=GRADLE_USER_HOME\r\nzipStorePath=wrapper/dists\r\ndistributionUrl=https\\://services.gradle.org/distributions/gradle-7.1.1-all.zip\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1250
+===================================================================
+diff --git a/gradle/wrapper/gradle-wrapper.properties b/gradle/wrapper/gradle-wrapper.properties
+--- a/gradle/wrapper/gradle-wrapper.properties	(revision 58908a730262c0ff3cc3f4cbb793a653fcab11d1)
++++ b/gradle/wrapper/gradle-wrapper.properties	(date 1628077200047)
+@@ -1,6 +1,6 @@
+-#Tue Jul 06 16:39:31 CEST 2021
++#Sun Apr 25 16:21:49 CEST 2021
+ distributionBase=GRADLE_USER_HOME
+ distributionPath=wrapper/dists
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-7.1.1-all.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-5.4.1-all.zip
+diff --git a/app/src/test/java/testUtilities.kt b/app/src/test/java/testUtilities.kt
+new file mode 100644
