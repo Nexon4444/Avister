@@ -4,7 +4,7 @@ set -x
 timestamp() {
   date +"at %H:%M:%S on %d/%m/%Y"
 }
-temp=$(echo git branch --show-current)
+temp=$(git branch --show-current)
 echo $temp
 #eval x=($temp == "backup")
 #echo $x
