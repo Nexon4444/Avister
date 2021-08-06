@@ -21,5 +21,5 @@ class ConfigurationManager(context: Context) {
             else -> throw IllegalArgumentException("Config Element $configElement is not reachable")
         }
     }
-    
+
 }
