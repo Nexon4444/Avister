@@ -23,20 +23,17 @@ then
   git stash
   git checkout backup
   git stash pop
-  timestamp() {
-    date +"at %H:%M:%S on %d/%m/%Y"
-  }
 
 else
   printf "EXISTS\n"
   git stash save "backup_stash"
   git stash branch temp-backup-branch
-#  git add .
+
   git commit -am "Regular auto-commit $(timestamp)"
   git checkout backup
   git merge temp-backup-branch
   git branch -D temp-backup-branch
-  git push --set-upstream origin backup
+  git push
 
   git checkout $temp
   git stash pop "backup_stash"
