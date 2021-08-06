@@ -3,7 +3,9 @@ package com.avister.ml.models
 import android.content.Context
 import android.os.SystemClock
 import android.util.Log
+import android.util.Rational
 import android.util.Size
+import com.avister.midiGeneration.GeneratorConfig
 import com.avister.utilities.ConfigurationManager
 import com.beust.klaxon.Klaxon
 import org.jfugue.pattern.Pattern
@@ -26,6 +28,7 @@ class MusicGeneratorAndroid(
     context: Context,
     modelFileName: String,
     modelType: ModelType,
+    generatorConfig: GeneratorConfig,
     device: Device = Device.CPU
 ) :
     MusicGenerator(
@@ -34,15 +37,17 @@ class MusicGeneratorAndroid(
             context, modelFileName
         ),
         getConfigurationManager(context, "numThreads").toInt(),
-        modelType
+        modelType,
+        generatorConfig
     ) {
     val configurationManager: ConfigurationManager = ConfigurationManager(context)
-    override val numThreads: Int = Integer.parseInt(configurationManager["numThreads"])
-    val modelFileName: String = configurationManager["modelFileName"]
+    override val numThreads: Int = Integer.parseInt(configurationManager["numThreads"][0])
+    val modelFileName: String = configurationManager["modelFileName"][0]
     val notesArray: List<String>
 
+
     init {
-        val notesString = context.assets.open(configurationManager["notes"]).bufferedReader()
+        val notesString = context.assets.open(configurationManager["notes"][0]).bufferedReader()
             .use { it.readText() }
         notesArray = Klaxon().parseArray(notesString)!!
     }
@@ -94,12 +99,16 @@ class MusicGeneratorAndroid(
         return result//(0..size).map { generateNoteArray(createFloatBuffer(initialArray)) }
     }
 
-    fun generateMidiPattern(size: Int, sead: FloatArray): Pattern {
-        val generatedMusic = generateMusic(size, sead)
+    fun generateMidiPattern(sead: FloatArray): Pattern {
+        val noteNumber = extractNumberOfNotes()
+        val generatedMusic = generateMusic(noteNumber, sead)
         val midiString = createMidiPattern(generatedMusic)
         return Pattern(midiString)
     }
 
+    fun extractNumberOfNotes(): Int {
+        return 1 / generatorConfig.duration * generatorConfig.barsNum
+    }
 
 //    fun createMidiFile(noteList: List<Str ing>, pathname: String) {
 ////        val player = Player()
@@ -157,7 +166,7 @@ class MusicGeneratorAndroid(
         fun createNotesArrayFromContext(context: Context): List<String> {
             val configurationManager = ConfigurationManager(context)
             val notesString: String =
-                context.assets.open(configurationManager["notes"]).bufferedReader()
+                context.assets.open(configurationManager["notes"][0]).bufferedReader()
                     .use { it.readText() }
             val notesArray: List<String> = Klaxon().parseArray(notesString)
                 ?: throw IllegalArgumentException("notesString can't be null!")
@@ -170,11 +179,24 @@ class MusicGeneratorAndroid(
 
         fun getConfigurationManager(context: Context, key: String): String {
             val configurationManager = ConfigurationManager(context)
-            return configurationManager[key]
+            return configurationManager[key][0]
         }
 
 
     }
+}
+
+private operator fun Rational.times(multiplier: Int): Int {
+    return this.numerator * multiplier/this.denominator
+}
+
+private operator fun Int.div(rat: Rational): Rational {
+    return Rational(this * rat.denominator, rat.numerator)
+
+}
+
+private operator fun Int.times(duration: Rational): Int {
+    return duration.numerator * this/duration.denominator
 }
 
 fun FloatArray.argMax(): Int {

@@ -33,7 +33,7 @@ class FileBrowserActivity : ListActivity() {
     private val configManager = ConfigurationManager(this)
     init {
         val cw = ContextWrapper(this)
-        rootdir = cw.getExternalFilesDir(configManager["mainMusicDir"])!!
+        rootdir = cw.getExternalFilesDir(configManager["mainMusicDir"] as String)!!
     }
     public override fun onCreate(state: Bundle?) {
         super.onCreate(state)

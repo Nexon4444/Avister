@@ -34,8 +34,8 @@ class MnistClassifier(
 //        val json = configFile.readText()
 //        val configuration = Klaxon().parse<Configuration>(json)
 
-        numThreads = Integer.parseInt(configurationManager["numThreads"])
-        modelName = configurationManager["modelFileName"]
+        numThreads = Integer.parseInt(configurationManager["numThreads"][0])
+        modelName = configurationManager["modelFileName"][0]
 
 //        numThreads =
         // Create the ImageClassifier instance.

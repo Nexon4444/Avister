@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.net.Uri
 import android.os.Environment
+import android.util.Rational
 import androidx.core.net.toUri
 import com.leff.midi.MidiFile
 import com.leff.midi.MidiTrack
@@ -15,7 +16,9 @@ import com.leff.midi.event.meta.TimeSignature
 import org.jfugue.pattern.Pattern
 import java.io.File
 import java.io.IOException
+
 typealias Music = String
+
 val durationMap = run {
     val max = 1920L
     mapOf(
@@ -54,6 +57,12 @@ val midiMap: Map<String, Int> = run {
 //    val completeNotesList = octavesList.flatMap { octaveN -> notes.map { note -> note + octaveN } }
     mapNoteToInt
 }
+val rational2durationString = (1..8).zip(durationMap.keys).map { entry ->
+    Rational(
+        1,
+        Math.pow(2.0, entry.first.toDouble()).toInt()
+    ) to entry.second
+}.toMap()
 
 fun Music.extractNotesFromChord() = this.split("+")
 
@@ -78,16 +87,27 @@ fun Pattern.saveAsMidi(applicationContext: Context, output: File, filename: Stri
     val ts = TimeSignature()
     val channel = 0
     var tick = 0L
+
     musicStringList.forEachIndexed { index, musicString ->
         val noteList = musicString.extractNotesFromChord()
-        val pitches = noteList.map { midiMap[it.extractName()] ?: error("Null value in midiMap")}
-        val durations = noteList.map { durationMap[it.extractDuration()] ?: error("No entry for duration string!")}
+        val pitches = noteList.map { midiMap[it.extractName()] ?: error("Null value in midiMap") }
+        val durations = noteList.map {
+            durationMap[it.extractDuration()] ?: error("No entry for duration string!")
+        }
         val maxDuration = durations.maxOrNull()
         val pitchsAndDurations = pitches.zip(durations)
 //        val pitch: Int = midiMap[musicString.extractName()] ?: error("Null value in midiMap")
 //        val duration = durationMap[musicString.extractDuration()] ?: error("No entry for duration string!")
         val velocity = 100
-        pitchsAndDurations.map { (pitch, duration) -> noteTrack.insertNote(channel, pitch, velocity, tick, duration)}
+        pitchsAndDurations.map { (pitch, duration) ->
+            noteTrack.insertNote(
+                channel,
+                pitch,
+                velocity,
+                tick,
+                duration
+            )
+        }
         tick += maxDuration!!
     }
     ts.setTimeSignature(4, 4, TimeSignature.DEFAULT_METER, TimeSignature.DEFAULT_DIVISION)

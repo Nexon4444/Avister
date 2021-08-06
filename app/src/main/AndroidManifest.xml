@@ -10,16 +10,8 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".midiGeneration.ChooseModelActivity"
-            android:label="@string/title_activity_choose_model"></activity>
-        <activity android:name=".utilities.SoundActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".utilities.TestingActivity">
+            android:name=".utilities.TestingActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,8 +19,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".markSightReading.TestSightReadingActivity" />
-        <activity android:name=".midiGeneration.GenerateMidiActivity" />
-        <activity android:name=".navigation.MainMenuActivity">
+        <activity
+            android:name=".midiGeneration.GenerateMidiActivity"
+            android:exported="true" />
+        <activity
+            android:name=".navigation.MainMenuActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,7 +35,9 @@
             android:name=".navigation.StartActivity"
             android:theme="@style/SplashTheme" />
         <activity android:name=".navigation.ChooseSongActivity" />
-        <activity android:name=".player.FileBrowserActivity">
+        <activity
+            android:name=".player.FileBrowserActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,6 +48,7 @@
         <activity android:name=".player.RecentSongsActivity" />
         <activity
             android:name=".player.SettingsActivity"
+            android:exported="true"
             android:label="@string/title_activity_settings"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -62,6 +61,7 @@
         <activity
             android:name=".player.SheetMusicActivity"
             android:configChanges="orientation"
+            android:exported="true"
             android:screenOrientation="landscape"
             android:theme="@style/PlayerTheme">
             <intent-filter>
