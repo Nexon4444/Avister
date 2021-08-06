@@ -1,6 +1,6 @@
 #!/bin/sh
 cd .
-
+set -x
 timestamp() {
   date +"at %H:%M:%S on %d/%m/%Y"
 }
