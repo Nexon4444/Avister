@@ -9,19 +9,22 @@ echo $temp
 #eval x=($temp == "backup")
 #echo $x
 
-if [$temp == "backup"]
+if [[ "$temp" = "backup" ]]
 then
   echo "error"
   exit -1
 fi
-echo "mowsi"
-git show-ref --verify --quiet refs/heads/backup
 
+git show-ref --verify --quiet refs/heads/backup
 if [$? == 0]
 then
   printf "NOT EXISTS\n"
   git stash
+  git stash branch backup
   git checkout backup
+  git commit -am "Regular auto-commit $(timestamp)"
+  git push --set-upstream origin backup
+  git checkout $temp
   git stash pop
 
 else
