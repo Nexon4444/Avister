@@ -26,17 +26,17 @@ then
 
 else
   printf "EXISTS\n"
-  git stash save "backup_stash"
+  git stash
   git stash branch temp-backup-branch
 
   git commit -am "Regular auto-commit $(timestamp)"
   git checkout backup
   git merge temp-backup-branch
   git branch -D temp-backup-branch
-  git push
+  git push --set-upstream origin backup
 
   git checkout $temp
-  git stash pop "backup_stash"
+  git stash pop
 fi
 #git commit -am "Regular auto-commit $(timestamp)"
 #
