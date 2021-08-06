@@ -34,7 +34,7 @@ else
 
   git commit -am "Regular auto-commit $(timestamp)"
   git checkout backup
-  git merge temp-backup-branch
+  git merge -X theirs temp-backup-branch
   git branch -D temp-backup-branch
   git push --set-upstream origin backup
 
