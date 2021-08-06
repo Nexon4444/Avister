@@ -16,6 +16,7 @@ then
 fi
 
 git show-ref --verify --quiet refs/heads/backup
+#0 if branch doesn't exist
 if [$? == 0]
 then
   printf "NOT EXISTS\n"
