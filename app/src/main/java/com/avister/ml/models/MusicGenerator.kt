@@ -1,7 +1,9 @@
 package com.avister.ml.models
 
 import androidx.core.text.isDigitsOnly
+import com.avister.midiGeneration.GeneratorConfig
 import com.avister.midiGeneration.Music
+import com.avister.midiGeneration.rational2durationString
 import org.jfugue.pattern.Pattern
 import org.jfugue.theory.Chord
 import org.jfugue.theory.Note
@@ -19,6 +21,7 @@ open class MusicGenerator(
     mappedByteBuffer: MappedByteBuffer,
     override val numThreads: Int,
     val modelType: ModelType,
+    val generatorConfig: GeneratorConfig,
     device: Device = Device.CPU
 
 ) : AbstractModel(mappedByteBuffer, device) {
@@ -71,8 +74,8 @@ open class MusicGenerator(
     }
 
     private fun cpcImplementation(noteList: List<Music>): String {
-        val normal = "q"
-        return noteList.joinToString("$normal+") + "q"
+        val normal = rational2durationString[generatorConfig.duration]
+        return noteList.joinToString("$normal+") + normal
     }
 
     fun createNoteOrChordFromString(notesString: String): Pattern =

@@ -32,14 +32,14 @@ class TestingActivity : AppCompatActivity() {
 //        val x = "s"
 //        patternSaveAsMidiWithChordsTest()
 
-        val configurationManager = ConfigurationManager(this)
-        val musicGeneratorAndroid =
-            MusicGeneratorAndroid(this, configurationManager["modelFileName"] as String, ModelType.CPC)
-
-        val sead = MusicGenerator.generateRandomArray(listOf(100)) as FloatArray
-//        musicGeneratorAndroid.generateMidiPattern(24, sead)
-        val pattern: Pattern = musicGeneratorAndroid.generateMidiPattern(24, sead)
-        val file = pattern.saveAsMidi(this, filesDir, "sheet_" + currentDateTimeAsString() + ".mid")
+//        val configurationManager = ConfigurationManager(this)
+////        val musicGeneratorAndroid =
+////            MusicGeneratorAndroid(this, configurationManager["modelFileName"][0], ModelType.CPC, )
+//
+//        val sead = MusicGenerator.generateRandomArray(listOf(100)) as FloatArray
+////        musicGeneratorAndroid.generateMidiPattern(24, sead)
+//        val pattern: Pattern = musicGeneratorAndroid.generateMidiPattern(24, sead)
+//        val file = pattern.saveAsMidi(this, filesDir, "sheet_" + currentDateTimeAsString() + ".mid")
     }
 
     fun patternSaveAsMidiWithChordsTest() {

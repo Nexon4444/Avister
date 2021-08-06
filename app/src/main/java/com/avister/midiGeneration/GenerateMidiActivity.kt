@@ -15,7 +15,11 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import com.avister.R
+import com.avister.midiGeneration.fragments.ComplexGeneratorFragment
+import com.avister.midiGeneration.fragments.SimpleGeneratorFragment
 import com.avister.ml.models.ModelType
 import com.avister.ml.models.MusicGenerator
 import com.avister.ml.models.MusicGeneratorAndroid
@@ -24,10 +28,15 @@ import com.avister.utilities.currentDateTimeAsString
 import org.jfugue.pattern.Pattern
 import java.io.File
 
+import android.app.PendingIntent.getActivity
+import androidx.fragment.app.FragmentTransaction
+import com.avister.midiGeneration.fragments.AbstractGeneratorFragment
 
-class GenerateMidiActivity : Activity() {
+
+class GenerateMidiActivity : FragmentActivity() {
     val tempo = 120
     val repeat = 1
+    lateinit var displayedFragment: AbstractGeneratorFragment
 //    fun setLayout(mainLayout: Int, secondaryLayout: Int): ViewGroup {
 //        val placeHolder = findViewById<Layout>(mainLayout)
 //        layoutInflater.inflate(secondaryLayout, placeHolder)
@@ -41,21 +50,13 @@ class GenerateMidiActivity : Activity() {
         val contentViews = listOf(R.layout.simple_music_generator_settings, R.layout.complicated_music_generator_settings)
         val generateMidiButton = findViewById<Button>(R.id.generate_midi_button)
         generateMidiButton.setOnClickListener {
-            generateAndSavePattern()
+            generateAndSavePattern(createGeneratorConfig())
         }
 
 
         val spinner: Spinner = findViewById(R.id.spinnerModelGenerationChoice)
-//create a list of items for the spinner.
-//create a list of items for the spinner.
         val items = config["generationModelsNames"]
-//create an adapter to describe how the items are displayed, adapters are used in several places in android.
-//There are multiple variations of this, but this is the basic variant.
-//create an adapter to describe how the items are displayed, adapters are used in several places in android.
-//There are multiple variations of this, but this is the basic variant.
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, items)
-//set the spinners adapter to the previously created one.
-//set the spinners adapter to the previously created one.
         spinner.adapter = adapter
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -66,7 +67,9 @@ class GenerateMidiActivity : Activity() {
             ) {
 
                 when(position) {
-                    0 -> print("0")
+//                    0 -> print("0")
+                    0 -> replaceFragment(SimpleGeneratorFragment.newInstance(), R.id.fragment_container_view)
+                    1 -> replaceFragment(ComplexGeneratorFragment.newInstance(), R.id.fragment_container_view)
                 }
 //                setLayout(R.layout.activity_generate_midi, contentViews[position])
             }
@@ -78,23 +81,36 @@ class GenerateMidiActivity : Activity() {
         }
     }
 
-    fun generateAndSavePattern(): Pair<Pattern, File> {
+    fun generateAndSavePattern(generatorConfig: GeneratorConfig): Pair<Pattern, File> {
         val configurationManager = ConfigurationManager(this)
         val musicGeneratorAndroid =
-            MusicGeneratorAndroid(this, configurationManager["modelFileName"] as String, ModelType.CPC)
+            MusicGeneratorAndroid(this, configurationManager["modelFileName"][0], ModelType.CPC, generatorConfig)
         val sead = MusicGenerator.generateRandomArray(listOf(100)) as FloatArray
 
         val cw = ContextWrapper(applicationContext)
         val directory = cw.getExternalFilesDir(Environment.DIRECTORY_MUSIC)
-//        val file = File(directory, "/test.midi")
-        val pattern: Pattern = musicGeneratorAndroid.generateMidiPattern(24, sead)
-//        val file = File(Environment.getExternalStorageDirectory(), )
-//        pattern.savePattern(file)
+        val pattern: Pattern = musicGeneratorAndroid.generateMidiPattern(sead)
         val file = pattern.saveAsMidi(this, filesDir, "sheet_" + currentDateTimeAsString() + ".mid")
-//        val player = Player()
-//        player.saveMidi(pattern, file)
-//        MidiFileManager.savePatternToMidi(pattern.setTempo(tempo).repeat(repeat), file)
         return (pattern to file)
+    }
+
+    fun replaceFragment(fragmentToReplace: Fragment, viewId: Int) {
+        val transaction = supportFragmentManager.beginTransaction()
+        displayedFragment = fragmentToReplace as AbstractGeneratorFragment
+
+        transaction.replace(viewId, fragmentToReplace)
+        transaction.addToBackStack(null)
+        transaction.commit()
+
+//        supportFragmentManager
+//                .beginTransaction()
+//                .replace(viewId, fragmentToReplace)
+//                .addToBackStack(fragmentToReplace.toString())
+//                .commit()
+    }
+
+    fun createGeneratorConfig(): GeneratorConfig{
+        return GeneratorConfig.generatorConfigFactoryCreate(displayedFragment.createGeneratorConfigInner())
     }
 
 //    fun exampleSave() {

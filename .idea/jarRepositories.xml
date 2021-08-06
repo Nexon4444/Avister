@@ -37,9 +37,24 @@
       <option name="url" value="https://kotlin.bintray.com/kotlin-datascience" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="maven7" />
+      <option name="name" value="maven7" />
+      <option name="url" value="https://kotlin.bintray.com/kotlin-datascience" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="maven" />
       <option name="name" value="maven" />
       <option name="url" value="https://jitpack.io" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="https://jitpack.io" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="https://github.com/kshoji/JFugue-for-Android/raw/master/jfugue-android/snapshot" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="maven4" />
@@ -62,34 +77,14 @@
       <option name="url" value="https://github.com/kshoji/USB-MIDI-Driver/raw/master/library/repository" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="maven6" />
+      <option name="name" value="maven6" />
+      <option name="url" value="https://github.com/kshoji/USB-MIDI-Driver/raw/master/library/repository" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="maven4" />
       <option name="name" value="maven4" />
       <option name="url" value="https://github.com/kshoji/BLE-MIDI-for-Android/raw/master/library/repository" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven2" />
-      <option name="name" value="maven2" />
-      <option name="url" value="https://maven.google.com" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven2" />
-      <option name="name" value="maven2" />
-      <option name="url" value="https://maven.google.com" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven" />
-      <option name="name" value="maven" />
-      <option name="url" value="https://jitpack.io" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven7" />
-      <option name="name" value="maven7" />
-      <option name="url" value="https://kotlin.bintray.com/kotlin-datascience" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven4" />
-      <option name="name" value="maven4" />
-      <option name="url" value="https://github.com/kshoji/JFugue-for-Android/raw/master/jfugue-android/snapshot" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="maven5" />
@@ -97,9 +92,14 @@
       <option name="url" value="https://github.com/kshoji/BLE-MIDI-for-Android/raw/master/library/repository" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="maven6" />
-      <option name="name" value="maven6" />
-      <option name="url" value="https://github.com/kshoji/USB-MIDI-Driver/raw/master/library/repository" />
+      <option name="id" value="maven2" />
+      <option name="name" value="maven2" />
+      <option name="url" value="https://maven.google.com" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven2" />
+      <option name="name" value="maven2" />
+      <option name="url" value="https://maven.google.com" />
     </remote-repository>
   </component>
 </project>
