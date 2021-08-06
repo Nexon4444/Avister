@@ -38,7 +38,7 @@ else
   git branch -D temp-backup-branch
   git push --set-upstream origin backup
 
-  git checkout $temp
+  git checkout $temp --theirs
   git stash pop
 fi
 #git commit -am "Regular auto-commit $(timestamp)"
