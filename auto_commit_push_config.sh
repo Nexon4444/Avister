@@ -5,7 +5,7 @@ temp = $?
 printf $temp
 git show-ref --verify --quiet refs/heads/BACKUP
 
-if $? == 1
+if ($? == 1)
 then
   git checkout -b BACKUP
 else
